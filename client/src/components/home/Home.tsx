@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ChildProps } from "react-apollo";
-import { QueryResponse, withUser } from "./../gql/queries/UserQuery";
+import { QueryResponse, withUser } from "./../../gql/queries/UserQuery";
 
 type InputProps = {};
 

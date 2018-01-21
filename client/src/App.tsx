@@ -1,4 +1,4 @@
-import { SidebarLeftScaleDown as Sidebar } from "./common/sidebar/Sidebar";
+import { SidebarLeftScaleDown as Sidebar } from "./components/common/sidebar/Sidebar";
 import * as React from "react";
 import { HashRouter as Router } from "react-router-dom";
 import { ApolloClient } from "apollo-client";
@@ -7,7 +7,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloProvider } from "react-apollo";
 import "./App.css";
 
-import { Routes } from "./common/Routes";
+import { Routes } from "./components/common/Routes";
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: "http://localhost:3001/graphql" }),
