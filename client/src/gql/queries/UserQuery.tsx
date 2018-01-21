@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
 import { graphql, QueryProps } from "react-apollo";
 
+import { User } from "./../../models/User";
 const USER_QUERY = gql`
   {
     user {
@@ -9,11 +10,6 @@ const USER_QUERY = gql`
     }
   }
 `;
-
-type User = {
-  email: string;
-  id: string;
-};
 
 type Response = {
   user: User;
