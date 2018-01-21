@@ -1,21 +1,20 @@
-import User  from "./../models/User";
+import User from "./../models/User";
 const mongoose = require("mongoose");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
-
 // SerializeUser is used to provide some identifying token that can be saved
 // in the users session.  We traditionally use the 'ID' for this.
 passport.serializeUser((user: any, done: any) => {
-    done(null, user.id);
+  done(null, user.id);
 });
 
 // The counterpart of 'serializeUser'.  Given only a user's ID, we must return
 // the user object.  This object is placed on 'req.user'.
 passport.deserializeUser((id: any, done: any) => {
-    User.findById(id, (err: any, user: any) => {
-        done(err, user);
-    });
+  User.findById(id, (err: any, user: any) => {
+    done(err, user);
+  });
 });
 
 // Instructs Passport how to authenticate a user using a locally saved email
@@ -26,19 +25,30 @@ passport.deserializeUser((id: any, done: any) => {
 // the password might not match the saved one.  In either case, we call the 'done'
 // callback, including a string that messages why the authentication process failed.
 // This string is provided back to the GraphQL client.
-passport.use(new LocalStrategy({ usernameField: "email" }, (email: string, password: string, done: any) => {
-    User.findOne({ email: email.toLowerCase() }, (err: any, user: any) => {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false, "Invalid Credentials"); }
+passport.use(
+  new LocalStrategy(
+    { usernameField: "email" },
+    (email: string, password: string, done: any) => {
+      User.findOne({ email: email.toLowerCase() }, (err: any, user: any) => {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          return done(null, false, "Invalid Credentials");
+        }
         user.comparePassword(password, (err: any, isMatch: boolean) => {
-            if (err) { return done(err); }
-            if (isMatch) {
-                return done(null, user);
-            }
-            return done(null, false, "Invalid credentials.");
+          if (err) {
+            return done(err);
+          }
+          if (isMatch) {
+            return done(null, user);
+          }
+          return done(null, false, "Invalid credentials.");
         });
-    });
-}));
+      });
+    }
+  )
+);
 
 // Creates a new user account.  We first check to see if a user already exists
 // with this email address to avoid making multiple accounts with identical addresses
@@ -48,22 +58,29 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email: string, passw
 // because Passport only supports callbacks, while GraphQL only supports promises
 // for async code!  Awkward!
 function signup({ email, password, req }: any) {
-    const user = new User({ email, password });
-    if (!email || !password) { throw new Error("You must provide an email and password."); }
+  const user = new User({ email, password });
+  if (!email || !password) {
+    throw new Error("You must provide an email and password.");
+  }
+  console.log(req);
 
-    return User.findOne({ email })
-        .then((existingUser: any) => {
-            if (existingUser) { throw new Error("Email in use"); }
-            return user.save();
-        })
-        .then((user: any) => {
-            return new Promise((resolve, reject) => {
-                req.logIn(user, (err: any) => {
-                    if (err) { reject(err); }
-                    resolve(user);
-                });
-            });
+  return User.findOne({ email })
+    .then((existingUser: any) => {
+      if (existingUser) {
+        throw new Error("Email in use");
+      }
+      return user.save();
+    })
+    .then((user: any) => {
+      return new Promise((resolve, reject) => {
+        req.logIn(user, (err: any) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(user);
         });
+      });
+    });
 }
 
 // Logs in a user.  This will invoke the 'local-strategy' defined above in this
@@ -72,13 +89,15 @@ function signup({ email, password, req }: any) {
 // Express.  We have another compatibility layer here to make it work nicely with
 // GraphQL, as GraphQL always expects to see a promise for handling async code.
 function login({ email, password, req }: any) {
-    return new Promise((resolve, reject) => {
-        passport.authenticate("local", (err: any, user: any) => {
-            if (!user) { reject("Invalid credentials."); }
+  return new Promise((resolve, reject) => {
+    passport.authenticate("local", (err: any, user: any) => {
+      if (!user) {
+        reject("Invalid credentials.");
+      }
 
-            req.login(user, () => resolve(user));
-        })({ body: { email, password } });
-    });
+      req.login(user, () => resolve(user));
+    })({ body: { email, password } });
+  });
 }
 
 module.exports = { signup, login };
