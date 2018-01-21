@@ -19,6 +19,7 @@ import * as homeController from "./controllers/home";
 import * as passportConfig from "./config/passport";
 import * as expressGraphQL from "express-graphql";
 import schema from "./schema/schema";
+import * as cors from "cors";
 
 const MongoStore = mongo(session);
 (<any>mongoose).Promise = global.Promise;
@@ -31,6 +32,9 @@ dotenv.config({ path: ".env.development" });
  * Create Express server.
  */
 const app = express();
+
+// cors has to be up here
+app.use(cors());
 
 /**
  * Connect to MongoDB.

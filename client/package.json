@@ -4,7 +4,11 @@
   "private": true,
   "homepage": "https://gaboe.github.io/boring-moving",
   "dependencies": {
+    "apollo-client-preset": "^1.0.6",
+    "graphql": "^0.12.3",
+    "graphql-tag": "^2.6.1",
     "react": "^16.2.0",
+    "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts-ts": "2.12.0",
@@ -26,6 +30,8 @@
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
     "@types/react-router-dom": "^4.2.3",
-    "gh-pages": "^1.1.0"
+    "gh-pages": "^1.1.0",
+    "@types/graphql": "^0.12.1",
+    "@types/lodash.flowright": "^3.5.3"
   }
 }

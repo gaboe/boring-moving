@@ -62,7 +62,6 @@ function signup({ email, password, req }: any) {
   if (!email || !password) {
     throw new Error("You must provide an email and password.");
   }
-  console.log(req);
 
   return User.findOne({ email })
     .then((existingUser: any) => {
