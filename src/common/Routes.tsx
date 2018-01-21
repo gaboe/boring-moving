@@ -6,7 +6,7 @@ import { Home } from "./../home/Home";
 const Routes = () => {
   return (
     <div>
-      <Route path="/home" component={Home} />
+      <Route exact={true} path="/" component={Home} />
       <Route path="/rules" component={Rule} />
     </div>
   );

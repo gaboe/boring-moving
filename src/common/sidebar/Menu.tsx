@@ -22,7 +22,7 @@ const MenuComponent: React.SFC<Props> = props => {
       onMouseLeave={props.setVisibilityFalse}
     >
       <Menu.Item name="home">
-        <Link to="/home">
+        <Link to="/">
           <Icon name="home" />
           Home
         </Link>
