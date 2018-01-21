@@ -1,6 +1,6 @@
 import { Routes } from "./common/Routes";
 
-import { SidebarLeftScaleDown as Sidebar } from "./common/Sidebar";
+import { SidebarLeftScaleDown as Sidebar } from "./common/sidebar/Sidebar";
 import * as React from "react";
 import { HashRouter as Router } from "react-router-dom";
 
@@ -9,7 +9,9 @@ class App extends React.Component<{}> {
     return (
       <div className="App">
         <Router>
-          <Sidebar children={Routes} />
+          <Sidebar>
+            <Routes />
+          </Sidebar>
         </Router>
       </div>
     );

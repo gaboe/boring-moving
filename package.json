@@ -9,7 +9,8 @@
     "react-router-dom": "^4.2.2",
     "react-scripts-ts": "2.12.0",
     "semantic-ui-react": "^0.77.2",
-    "styled-components": "^2.4.0"
+    "styled-components": "^2.4.0",
+    "styled-components-ts": "^0.0.8"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -20,11 +21,11 @@
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "gh-pages": "^1.1.0",    
     "@types/jest": "^22.0.1",
     "@types/node": "^9.3.0",
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
-    "@types/react-router-dom": "^4.2.3"
+    "@types/react-router-dom": "^4.2.3",
+    "gh-pages": "^1.1.0"
   }
 }
