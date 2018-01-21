@@ -1,17 +1,20 @@
 import * as React from "react";
-const logo = require("./../logo.svg");
-import "./../App.css";
+import { ChildProps } from "react-apollo";
+import { QueryResponse, withUser } from "./../gql/queries/UserQuery";
 
-const Home = () => {
-  return (
-    <div>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">Welcome to Boring Moving!</h1>
-      </header>
-      <p className="App-intro">This app will be tremendous</p>
-    </div>
-  );
-};
+type InputProps = {};
 
-export { Home };
+class Home extends React.Component<ChildProps<InputProps, QueryResponse>> {
+  render() {
+    const { loading, user, error } = this.props.data as QueryResponse;
+    if (loading) {
+      return <div>Loading</div>;
+    }
+    if (error) {
+      return <h1>ERROR</h1>;
+    }
+    return <div>User is {user}</div>;
+  }
+}
+
+export default withUser(Home);
