@@ -33,6 +33,12 @@ const MenuComponent: React.SFC<Props> = props => {
           Rules
         </Link>
       </Menu.Item>
+      <Menu.Item name="login">
+        <Link to="/login">
+          <Icon name="gamepad" />
+          Login
+        </Link>
+      </Menu.Item>
     </Sidebar>
   );
 };
