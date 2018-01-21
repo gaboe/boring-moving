@@ -31,7 +31,6 @@
     "@types/react-dom": "^16.0.3",
     "@types/react-router-dom": "^4.2.3",
     "gh-pages": "^1.1.0",
-    "@types/graphql": "^0.12.1",
-    "@types/lodash.flowright": "^3.5.3"
+    "@types/graphql": "^0.12.1"
   }
 }
