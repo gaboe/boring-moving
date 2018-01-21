@@ -34,7 +34,10 @@ dotenv.config({ path: ".env.development" });
 const app = express();
 
 // cors has to be up here
-app.use(cors());
+const corsOptions = {
+  credentials: true // <-- REQUIRED backend setting
+};
+app.use(cors(corsOptions));
 
 /**
  * Connect to MongoDB.
