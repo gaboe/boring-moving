@@ -99,4 +99,4 @@ function login({ email, password, req }: any) {
   });
 }
 
-module.exports = { signup, login };
+export { signup, login };
