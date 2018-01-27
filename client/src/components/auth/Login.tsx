@@ -3,7 +3,7 @@ import { Button, Form, InputOnChangeData } from "semantic-ui-react";
 
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
 import { nameof } from "./../../utils/Reflection";
-
+import { USER_QUERY } from "./../../gql/queries/UserQuery";
 type State = {
   email: string;
   password: string;
@@ -17,7 +17,8 @@ class Login extends React.Component<Props, State> {
     if (this.props.mutate) {
       this.props
         .mutate({
-          variables: { email: this.state.email, password: this.state.password }
+          variables: { email: this.state.email, password: this.state.password },
+          refetchQueries: [{ query: USER_QUERY }]
         })
         .then(({ data }) => {
           console.log("got data", data);
