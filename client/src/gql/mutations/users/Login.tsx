@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 
 const mutation = gql`
   mutation Login($email: String, $password: String) {
@@ -9,4 +10,6 @@ const mutation = gql`
   }
 `;
 
-export { mutation };
+const withLoginMutation = graphql(mutation);
+
+export { withLoginMutation };

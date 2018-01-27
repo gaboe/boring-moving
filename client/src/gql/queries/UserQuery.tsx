@@ -19,4 +19,4 @@ const withUser = graphql<Response>(USER_QUERY);
 
 type R = QueryProps & Response;
 
-export { withUser, R as QueryResponse };
+export { withUser, R as QueryResponse, Response as ResponseType };
