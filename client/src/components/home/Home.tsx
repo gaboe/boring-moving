@@ -8,6 +8,8 @@ class Home extends React.Component<{}> {
     return (
       <Query query={query}>
         {(result: QueryResult<User>) => {
+          // tslint:disable-next-line:no-console
+          console.log(result);
           return <div>Hello! {result.data && result.data.email}</div>;
         }}
       </Query>
