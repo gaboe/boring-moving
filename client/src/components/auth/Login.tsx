@@ -1,28 +1,19 @@
 import * as React from "react";
 import { Button, Form, InputOnChangeData } from "semantic-ui-react";
-import { ChildProps } from "react-apollo";
 
-import {
-  withLoginMutation,
-  InputProps,
-  Response
-} from "./../../gql/mutations/users/Login";
+import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
 import { nameof } from "./../../utils/Reflection";
+
 type State = {
   email: string;
   password: string;
 };
 
-class Login extends React.Component<ChildProps<InputProps, Response>, State> {
-  handleChange = (
-    event: React.SyntheticEvent<HTMLInputElement>,
-    data: InputOnChangeData
-  ) => {
+class Login extends React.Component<Props, State> {
+  handleChange = (_: {}, data: InputOnChangeData) =>
     this.setState({ [data.name]: data.value });
-  };
 
   login = () => {
-    console.log(this.state);
     if (this.props.mutate) {
       this.props
         .mutate({
@@ -35,13 +26,8 @@ class Login extends React.Component<ChildProps<InputProps, Response>, State> {
           console.log("there was an error sending the query", error);
         });
     }
-
-    console.log(this.props);
   };
 
-  nameof<T>(key: keyof T, instance?: T): keyof T {
-    return key;
-  }
   render() {
     return (
       <Form>
@@ -67,5 +53,5 @@ class Login extends React.Component<ChildProps<InputProps, Response>, State> {
   }
 }
 
-const c = withLoginMutation(Login);
-export { c as Login };
+const hoc = withLoginMutation(Login);
+export { hoc as Login };
