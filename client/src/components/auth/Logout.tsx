@@ -8,7 +8,7 @@ type Props = {
 };
 
 class Logout extends React.Component<ChildProps<Props, {}>> {
-  onClick() {
+  onClick = () => {
     this.props
       .mutate({})
       .then(({ data }) => {
@@ -17,14 +17,12 @@ class Logout extends React.Component<ChildProps<Props, {}>> {
       .catch(error => {
         console.log("there was an error sending the query", error);
       });
-  }
+    // tslint:disable-next-line:semicolon
+  };
 
   render() {
     console.log(this.props);
-    return (
-      // tslint:disable-next-line:jsx-no-bind
-      <div onClick={this.onClick.bind(this)}>Click to logout </div>
-    );
+    return <div onClick={this.onClick}>Click to logout </div>;
   }
 }
 
