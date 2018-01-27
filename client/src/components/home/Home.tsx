@@ -1,20 +1,17 @@
 import * as React from "react";
-import { ChildProps } from "react-apollo";
-import { QueryResponse, withUser } from "./../../gql/queries/UserQuery";
+import { Query, QueryResult } from "react-apollo";
+import { USER_QUERY as query } from "./../../gql/queries/UserQuery";
+import { User } from "../../models/User";
 
-type InputProps = {};
-
-class Home extends React.Component<ChildProps<InputProps, QueryResponse>> {
+class Home extends React.Component<{}> {
   render() {
-    const { loading, user, error } = this.props.data as QueryResponse;
-    if (loading) {
-      return <div>Loading</div>;
-    }
-    if (error) {
-      return <h1>ERROR</h1>;
-    }
-    return <div>User is {user}</div>;
+    return (
+      <Query query={query}>
+        {(result: QueryResult<User>) => {
+          return <div>Hello! {result.data && result.data.email}</div>;
+        }}
+      </Query>
+    );
   }
 }
-
-export default withUser(Home);
+export { Home };
