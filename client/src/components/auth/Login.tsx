@@ -24,6 +24,7 @@ class Login extends React.Component<Props, State> {
           console.log("got data", data);
         })
         .catch(error => {
+          // TODO show errors
           console.log("there was an error sending the query", error);
         });
     }

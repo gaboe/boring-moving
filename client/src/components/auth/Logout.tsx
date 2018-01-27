@@ -23,7 +23,6 @@ class Logout extends React.Component<ChildProps<Props, {}>> {
   };
 
   render() {
-    console.log(this.props);
     return <div onClick={this.onClick}>Click to logout </div>;
   }
 }
