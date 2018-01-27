@@ -39,6 +39,12 @@ const MenuComponent: React.SFC<Props> = props => {
           Login
         </Link>
       </Menu.Item>
+      <Menu.Item name="logout">
+        <Link to="/logout">
+          <Icon name="gamepad" />
+          Logout
+        </Link>
+      </Menu.Item>
     </Sidebar>
   );
 };
