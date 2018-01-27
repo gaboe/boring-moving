@@ -17,7 +17,6 @@ class Logout extends React.Component<ChildProps<Props, {}>> {
       .catch(error => {
         console.log("there was an error sending the query", error);
       });
-    // tslint:disable-next-line:semicolon
   };
 
   render() {
@@ -26,6 +25,6 @@ class Logout extends React.Component<ChildProps<Props, {}>> {
   }
 }
 
-const withLogout = graphql(mutation, {});
+const withLogout = graphql<Props>(mutation, {});
 
 export default withLogout(Logout);

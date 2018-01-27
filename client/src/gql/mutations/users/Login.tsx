@@ -1,5 +1,6 @@
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
+import { User } from "../../../models/User";
 
 const mutation = gql`
   mutation Login($email: String, $password: String) {
@@ -10,6 +11,9 @@ const mutation = gql`
   }
 `;
 
-const withLoginMutation = graphql(mutation);
+type Response = { user: User };
+type InputProps = { email: string; password: string };
 
-export { withLoginMutation };
+const withLoginMutation = graphql<InputProps, Response>(mutation);
+
+export { withLoginMutation, Response, InputProps };
