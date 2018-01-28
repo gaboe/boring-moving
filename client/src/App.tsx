@@ -11,7 +11,7 @@ import { Routes } from "./components/common/Routes";
 
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: "http://localhost:3001/graphql",
+    uri: "http://localhost:3001/graphql", // TODO add enviroments
     credentials: "include"
   }),
   cache: new InMemoryCache()
