@@ -15,7 +15,11 @@ class Home extends React.Component<{}> {
       <Query query={query}>
         {(result: QueryResult<{ user: User }>) => {
           console.log(result.data);
-          return <div>Hello! {this.getName(result)}</div>;
+          return (
+            <div>
+              {process.env.SERVER_URL}Hello! {this.getName(result)}
+            </div>
+          );
         }}
       </Query>
     );
