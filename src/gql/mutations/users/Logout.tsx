@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { ChildProps } from "react-apollo";
+import { ChildProps, graphql } from "react-apollo";
 
 const mutation = gql`
   mutation {
@@ -8,6 +8,8 @@ const mutation = gql`
     }
   }
 `;
-type Props = ChildProps<{}, {}>;
 
-export { mutation, Props };
+type Props = ChildProps<{}, {}>;
+const withLogout = graphql<Props>(mutation);
+
+export { mutation, Props, withLogout };
