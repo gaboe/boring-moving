@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Form, InputOnChangeData } from "semantic-ui-react";
+import { Button, Form, InputOnChangeData, Message } from "semantic-ui-react";
 
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
 import { nameof } from "./../../utils/Reflection";
@@ -9,13 +9,19 @@ import { RouteComponentProps } from "react-router";
 type State = {
   email: string;
   password: string;
+  formError: boolean;
 };
 
 type PropsWithRouter = Props & RouteComponentProps<{}>;
 
 class Login extends React.Component<PropsWithRouter, State> {
+  constructor(props: PropsWithRouter) {
+    super(props);
+    this.state = { email: "", password: "", formError: false };
+  }
+
   handleChange = (_: {}, data: InputOnChangeData) =>
-    this.setState({ [data.name]: data.value });
+    this.setState({ [data.name]: data.value, formError: false });
 
   login = () => {
     if (this.props.mutate) {
@@ -28,33 +34,39 @@ class Login extends React.Component<PropsWithRouter, State> {
           this.props.history.push("/");
         })
         .catch(error => {
-          // TODO show errors
-          console.log("there was an error sending the query", error);
+          this.setState({ formError: true });
         });
     }
   };
 
   render() {
     return (
-      <Form>
-        <Form.Input
-          name={nameof<State>("email")}
-          label="Email"
-          type="input"
-          placeholder="email"
-          onChange={this.handleChange}
-        />
-        <Form.Input
-          name={nameof<State>("password")}
-          label="Password"
-          type="password"
-          placeholder="password"
-          onChange={this.handleChange}
-        />
-        <Button onClick={this.login} type="submit">
-          Submit
-        </Button>
-      </Form>
+      <>
+        <Form error={this.state.formError}>
+          <Form.Input
+            name={nameof<State>("email")}
+            label="Email"
+            type="input"
+            placeholder="email"
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            name={nameof<State>("password")}
+            label="Password"
+            type="password"
+            placeholder="password"
+            onChange={this.handleChange}
+          />
+          <Message
+            error={true}
+            header="Ups"
+            content="It seem's like your credentials are not correct, if you are not registered, you can register here"
+          />
+          <Button onClick={this.login} type="submit">
+            Submit
+          </Button>
+        </Form>
+      </>
     );
   }
 }
