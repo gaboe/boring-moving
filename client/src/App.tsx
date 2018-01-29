@@ -9,11 +9,9 @@ import "./App.css";
 
 import { Routes } from "./components/common/Routes";
 
-console.log(process.env);
-
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: process.env.REACT_APP_SERVER_URL, // TODO add enviroments
+    uri: process.env.REACT_APP_SERVER_URL,
     credentials: "include"
   }),
   cache: new InMemoryCache()
