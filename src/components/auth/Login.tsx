@@ -4,12 +4,16 @@ import { Button, Form, InputOnChangeData } from "semantic-ui-react";
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
 import { nameof } from "./../../utils/Reflection";
 import { USER_QUERY } from "./../../gql/queries/UserQuery";
+import { RouteComponentProps } from "react-router";
+
 type State = {
   email: string;
   password: string;
 };
 
-class Login extends React.Component<Props, State> {
+type PropsWithRouter = Props & RouteComponentProps<{}>;
+
+class Login extends React.Component<PropsWithRouter, State> {
   handleChange = (_: {}, data: InputOnChangeData) =>
     this.setState({ [data.name]: data.value });
 
@@ -21,7 +25,7 @@ class Login extends React.Component<Props, State> {
           refetchQueries: [{ query: USER_QUERY }]
         })
         .then(({ data }) => {
-          console.log("got data", data);
+          this.props.history.push("/");
         })
         .catch(error => {
           // TODO show errors

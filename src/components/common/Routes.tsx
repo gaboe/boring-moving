@@ -4,6 +4,7 @@ import { Rule } from "./../rules/Rule";
 import { Home } from "./../home/Home";
 import { Login } from "./../auth/Login";
 import Logout from "./../auth/Logout";
+
 const Routes = () => {
   return (
     <div>

@@ -1,25 +1,21 @@
 import * as React from "react";
-import { graphql, ChildProps } from "react-apollo";
+import { graphql } from "react-apollo";
 
-import { mutation } from "./../../gql/mutations/users/Logout";
+import { mutation, Props } from "./../../gql/mutations/users/Logout";
 import { USER_QUERY } from "../../gql/queries/UserQuery";
+import { RouteComponentProps } from "react-router";
 
-type Props = {
-  mutate: () => void;
-};
-
-class Logout extends React.Component<ChildProps<Props, {}>> {
+class Logout extends React.Component<Props & RouteComponentProps<{}>> {
   onClick = () => {
-    this.props
-      .mutate({
-        refetchQueries: [{ query: USER_QUERY }]
-      })
-      .then(({ data }) => {
-        console.log("got data", data);
-      })
-      .catch(error => {
-        console.log("there was an error sending the query", error);
-      });
+    if (this.props.mutate) {
+      this.props
+        .mutate({
+          refetchQueries: [{ query: USER_QUERY }]
+        })
+        .then(() => {
+          this.props.history.push("/login");
+        });
+    }
   };
 
   render() {
