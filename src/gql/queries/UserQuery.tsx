@@ -1,4 +1,6 @@
 import gql from "graphql-tag";
+import { User } from "../../models/User";
+import { QueryResult } from "react-apollo";
 
 const USER_QUERY = gql`
   {
@@ -9,4 +11,8 @@ const USER_QUERY = gql`
   }
 `;
 
-export { USER_QUERY };
+type Response = QueryResult<{
+  user: User;
+}>;
+
+export { USER_QUERY, Response };
