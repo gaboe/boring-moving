@@ -4,6 +4,7 @@ import { Rule } from "./../rules/Rule";
 import { Home } from "./../home/Home";
 import { Login } from "./../auth/Login";
 import Logout from "./../auth/Logout";
+import { Register } from "../auth/Register";
 
 const Routes = () => {
   return (
@@ -12,6 +13,7 @@ const Routes = () => {
       <Route path="/rules" component={Rule} />
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} />
+      <Route path="/register" component={Register} />
     </div>
   );
 };
