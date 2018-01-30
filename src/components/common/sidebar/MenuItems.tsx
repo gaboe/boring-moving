@@ -27,7 +27,7 @@ const MenuItems: React.SFC<Props> = props => {
             </Menu.Item>
             <Menu.Item name="gamepad">
               <Link to="/rules">
-                <Icon name="gamepad" />
+                <Icon name="options" />
                 Rules
               </Link>
             </Menu.Item>
@@ -35,7 +35,7 @@ const MenuItems: React.SFC<Props> = props => {
             {isAuthentificated(result) || (
               <Menu.Item name="login">
                 <Link to="/login">
-                  <Icon name="gamepad" />
+                  <Icon name="user" />
                   Login
                 </Link>
               </Menu.Item>

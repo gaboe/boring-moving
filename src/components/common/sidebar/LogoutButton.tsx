@@ -16,7 +16,7 @@ const LogoutButton: React.SFC<Props> = props => {
           props.onClick();
         }}
       >
-        <Icon name="gamepad" />
+        <Icon name="sign out" />
         Logout
       </Link>
     </Menu.Item>
