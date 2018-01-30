@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
 import { nameof } from "./../../utils/Reflection";
 import { USER_QUERY } from "./../../gql/queries/UserQuery";
-import { RouteComponentProps, withRouter } from "react-router";
+import { RouteComponentProps } from "react-router";
 import GridColumn from "semantic-ui-react/dist/commonjs/collections/Grid/GridColumn";
 
 type State = {
@@ -87,5 +87,5 @@ class Login extends React.Component<PropsWithRouter, State> {
   }
 }
 
-const hoc = withLoginMutation(withRouter(Login));
+const hoc = withLoginMutation(Login);
 export { hoc as Login };
