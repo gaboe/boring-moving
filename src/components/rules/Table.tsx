@@ -1,7 +1,10 @@
 import * as React from "react";
 import { Icon, Menu, Table } from "semantic-ui-react";
+import { Rule } from "../../models/Rule";
 
-const RulesTable = () => (
+type Props = { rules: Rule[] };
+
+const RulesTable: React.SFC<Props> = props => (
   <Table celled={true}>
     <Table.Header>
       <Table.Row>
@@ -13,24 +16,16 @@ const RulesTable = () => (
     </Table.Header>
 
     <Table.Body>
-      <Table.Row>
-        <Table.Cell>Cell</Table.Cell>
-        <Table.Cell>Cell</Table.Cell>
-        <Table.Cell>Cell</Table.Cell>
-        <Table.Cell>Cell</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Cell</Table.Cell>
-        <Table.Cell>Cell</Table.Cell>
-        <Table.Cell>Cell</Table.Cell>
-        <Table.Cell>Cell</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Cell</Table.Cell>
-        <Table.Cell>Cell</Table.Cell>
-        <Table.Cell>Cell</Table.Cell>
-        <Table.Cell>Cell</Table.Cell>
-      </Table.Row>
+      {props.rules.map(x => {
+        return (
+          <Table.Row key={x.id}>
+            <Table.Cell>{x.sender}</Table.Cell>
+            <Table.Cell>{x.subject}</Table.Cell>
+            <Table.Cell>{x.content}</Table.Cell>
+            <Table.Cell>{x.period}</Table.Cell>
+          </Table.Row>
+        );
+      })}
     </Table.Body>
 
     <Table.Footer>

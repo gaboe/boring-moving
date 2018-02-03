@@ -3301,6 +3301,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+kanskje@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/kanskje/-/kanskje-2.0.1.tgz#47eee4ac1ecbefb20d34bebf3a9c76f3ff6a463c"
+
 killable@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/killable/-/killable-1.0.0.tgz#da8b84bd47de5395878f95d64d02f2449fe05e6b"
@@ -3485,6 +3489,10 @@ lru-cache@^4.0.1:
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
+
+m.m@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/m.m/-/m.m-1.0.3.tgz#817091d1d1b3d510395ef28e118ad11d2c568d7b"
 
 macaddress@^0.2.8:
   version "0.2.8"
