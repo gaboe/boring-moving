@@ -2,9 +2,10 @@ import gql from "graphql-tag";
 import { QueryResult } from "react-apollo";
 import { Rule } from "../../../models/Rule";
 
-const RulesOnUserQuery = gql`
+const RULES_ON_USER_QUERY = gql`
   {
     user {
+      id
       rules {
         id
         sender
@@ -17,4 +18,4 @@ const RulesOnUserQuery = gql`
 
 type Response = QueryResult<{ user: { rules: Rule[] } }>;
 
-export { RulesOnUserQuery, Response };
+export { RULES_ON_USER_QUERY, Response };

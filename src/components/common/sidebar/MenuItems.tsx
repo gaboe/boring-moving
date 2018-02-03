@@ -9,6 +9,7 @@ import {
 } from "./../../../gql/queries/UserQuery";
 import { Props, withLogout } from "./../../../gql/mutations/users/Logout";
 import { LogoutButton } from "./LogoutButton";
+import { RULES_ON_USER_QUERY } from "../../../gql/queries/rules/RulesOnUserQuery";
 
 const isAuthentificated = (props: Response) =>
   props.data !== undefined && props.data.user !== null;
@@ -45,7 +46,12 @@ const MenuItems: React.SFC<Props> = props => {
               <LogoutButton
                 onClick={() => {
                   if (props.mutate) {
-                    props.mutate({ refetchQueries: [{ query: query }] });
+                    props.mutate({
+                      refetchQueries: [
+                        { query: query },
+                        { query: RULES_ON_USER_QUERY }
+                      ]
+                    });
                   }
                 }}
               />
