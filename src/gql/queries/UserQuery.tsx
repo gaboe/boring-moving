@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import { User } from "../../models/User";
-import { QueryResult } from "react-apollo";
+import { QueryResult, ChildProps, graphql } from "react-apollo";
 
 const USER_QUERY = gql`
   {
@@ -14,5 +14,8 @@ const USER_QUERY = gql`
 type Response = QueryResult<{
   user: User;
 }>;
+type Props = ChildProps<{}, {}>;
 
-export { USER_QUERY, Response };
+const withUser = graphql<Props>(USER_QUERY);
+
+export { USER_QUERY, Response, withUser };

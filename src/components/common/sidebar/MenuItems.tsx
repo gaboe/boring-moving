@@ -25,7 +25,7 @@ const MenuItems: React.SFC<Props> = props => {
                 Home
               </Link>
             </Menu.Item>
-            <Menu.Item name="gamepad">
+            <Menu.Item name="rules">
               <Link to="/rules">
                 <Icon name="options" />
                 Rules
