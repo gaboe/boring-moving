@@ -16,11 +16,14 @@ type Props = {
 
 const MenuIcon: React.SFC<Props> = props => {
   return (
-    <Section
-      onMouseEnter={props.setVisibilityTrue}
-      onMouseLeave={props.setVisibilityFalse}
-    >
-      <Icon name="sidebar" size="big" loading={props.isMenuVisible} />
+    <Section>
+      <Icon
+        onMouseEnter={props.setVisibilityTrue}
+        onMouseLeave={props.setVisibilityFalse}
+        name="sidebar"
+        size="big"
+        loading={props.isMenuVisible}
+      />
     </Section>
   );
 };
