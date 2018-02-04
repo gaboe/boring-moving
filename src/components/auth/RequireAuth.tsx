@@ -4,7 +4,7 @@ import { RouteComponentProps } from "react-router";
 
 type PropsWithRouter = Response & RouteComponentProps<{}>;
 
-type Component = React.SFC;
+type Component = React.ComponentClass | React.SFC;
 
 const hoc = (WrappedComponent: Component) => {
   class RequireAuth extends React.Component {
