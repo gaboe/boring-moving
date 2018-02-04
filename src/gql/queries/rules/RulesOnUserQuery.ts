@@ -16,6 +16,13 @@ const RULES_ON_USER_QUERY = gql`
   }
 `;
 
-type Response = QueryResult<{ user: { rules: Rule[] } }>;
+type Response = QueryResult<{ user?: { rules: Rule[] } }>;
 
-export { RULES_ON_USER_QUERY, Response };
+const getRules = (response: Response) => {
+  if (response.data && response.data.user && response.data.user) {
+    return response.data.user.rules;
+  }
+  return [];
+};
+
+export { RULES_ON_USER_QUERY, Response, getRules };
