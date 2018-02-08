@@ -17,6 +17,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   defaultOptions: {
     query: {
+      // TODO this can make application slow, use caching instead
       fetchPolicy: "network-only"
     }
   }
