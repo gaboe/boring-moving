@@ -32,7 +32,12 @@ const MenuItems: React.SFC<Props> = props => {
                 Rules
               </Link>
             </Menu.Item>
-
+            <Menu.Item name="user-settings">
+              <Link to="/user-settings">
+                <Icon name="setting" />
+                User settings
+              </Link>
+            </Menu.Item>
             {isAuthentificated(result) || (
               <Menu.Item name="login">
                 <Link to="/login">

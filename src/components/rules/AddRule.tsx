@@ -8,6 +8,7 @@ import {
   withAddRuleMutation,
   Props
 } from "./../../gql/mutations/rules/AddRule";
+import { RouterProps } from "react-router";
 type State = {
   sender: string;
   subject: string;
@@ -16,9 +17,10 @@ type State = {
   period: number;
   errors: string[];
 };
+type PropsWithRouter = Props & RouterProps;
 
-class AddRule extends React.Component<Props, State> {
-  constructor(props: Props) {
+class AddRule extends React.Component<PropsWithRouter, State> {
+  constructor(props: PropsWithRouter) {
     super(props);
     this.state = {
       errors: [],
@@ -60,7 +62,7 @@ class AddRule extends React.Component<Props, State> {
           refetchQueries: [{ query: RULES_ON_USER_QUERY }]
         })
         .then(({ data }) => {
-          console.log(data.addRule);
+          this.props.history.push("/rules");
         });
     }
   }

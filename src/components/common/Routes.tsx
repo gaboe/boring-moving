@@ -6,6 +6,7 @@ import { Login } from "./../auth/Login";
 import { Register } from "../auth/Register";
 import { RequireAuth } from "./../auth/RequireAuth";
 import { AddRule } from "../rules/AddRule";
+import { UserSettings } from "../userSettings/UserSettings";
 
 const Routes = () => {
   return (
@@ -15,6 +16,7 @@ const Routes = () => {
       <Route path="/add-rule" component={RequireAuth(AddRule)} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <Route path="/user-settings" component={RequireAuth(UserSettings)} />
     </div>
   );
 };
