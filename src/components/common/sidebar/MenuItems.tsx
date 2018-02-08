@@ -46,12 +46,14 @@ const MenuItems: React.SFC<Props> = props => {
               <LogoutButton
                 onClick={() => {
                   if (props.mutate) {
-                    props.mutate({
-                      refetchQueries: [
-                        { query: query },
-                        { query: RULES_ON_USER_QUERY }
-                      ]
-                    });
+                    props
+                      .mutate({
+                        refetchQueries: [
+                          { query: query },
+                          { query: RULES_ON_USER_QUERY }
+                        ]
+                      })
+                      .then(e => console.log(props));
                   }
                 }}
               />

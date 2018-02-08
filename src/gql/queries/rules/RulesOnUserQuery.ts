@@ -11,6 +11,7 @@ const RULES_ON_USER_QUERY = gql`
         sender
         subject
         content
+        userID
       }
     }
   }

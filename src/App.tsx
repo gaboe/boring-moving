@@ -14,7 +14,12 @@ const client = new ApolloClient({
     uri: process.env.REACT_APP_SERVER_URL,
     credentials: "include"
   }),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  defaultOptions: {
+    query: {
+      fetchPolicy: "network-only"
+    }
+  }
 });
 
 class App extends React.Component<{}> {
