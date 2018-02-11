@@ -1,18 +1,31 @@
 import gql from "graphql-tag";
 import { graphql, ChildProps } from "react-apollo";
-import { User } from "../../../models/User";
+import { User, NonAuthenificatedUser } from "../../../models/User";
 
 const mutation = gql`
-  mutation Login($email: String, $password: String) {
-    login(email: $email, password: $password) {
+  mutation Authentificate(
+    $googleID: String
+    $firstName: String
+    $lastName: String
+    $email: String
+  ) {
+    authentificate(
+      googleID: $googleID
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+    ) {
       id
       email
+      firstName
+      lastName
+      googleID
     }
   }
 `;
 
 type Response = { user: User };
-type InputProps = { email: string; password: string };
+type InputProps = NonAuthenificatedUser;
 
 type Props = ChildProps<InputProps, Response>;
 

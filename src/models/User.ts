@@ -1,9 +1,15 @@
 import { Rule } from "./Rule";
 
-type User = {
+type NonAuthenificatedUser = {
+  googleID: string;
   email: string;
-  id: string;
-  rules: Rule[];
+  firstName: string;
+  lastName: string;
 };
 
-export { User };
+type User = {
+  id: string;
+  rules: Rule[];
+} & NonAuthenificatedUser;
+
+export { User, NonAuthenificatedUser };

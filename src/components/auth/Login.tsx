@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Form, InputOnChangeData, Grid } from "semantic-ui-react";
+import { Form, InputOnChangeData, Grid, Header } from "semantic-ui-react";
 
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
 import { USER_QUERY } from "./../../gql/queries/UserQuery";
@@ -7,6 +7,7 @@ import { RouteComponentProps } from "react-router";
 import GridColumn from "semantic-ui-react/dist/commonjs/collections/Grid/GridColumn";
 import { GoogleLogin, GoogleLoginResponse } from "react-google-login";
 import { CSSProperties } from "react";
+import { NonAuthenificatedUser } from "../../models/User";
 
 const GoogleButtonStyle: CSSProperties = {};
 type State = {
@@ -26,24 +27,37 @@ class Login extends React.Component<PropsWithRouter, State> {
   handleChange = (_: {}, data: InputOnChangeData) =>
     this.setState({ [data.name]: data.value, formError: false });
 
-  login = () => {
+  authentificate = ({
+    googleID,
+    firstName,
+    lastName,
+    email
+  }: NonAuthenificatedUser): void => {
     if (this.props.mutate) {
       this.props
         .mutate({
-          variables: { email: this.state.email, password: this.state.password },
+          variables: { googleID, firstName, lastName, email },
           refetchQueries: [{ query: USER_QUERY }]
         })
         .then(({ data }) => {
           this.props.history.push("/");
         })
         .catch(error => {
+          console.log("eeer", error);
           this.setState({ formError: true });
         });
     }
   };
 
   googleResponse = (response: GoogleLoginResponse) => {
-    console.log(response);
+    const profile = response.getBasicProfile();
+    const user: NonAuthenificatedUser = {
+      googleID: profile.getId(),
+      email: profile.getEmail(),
+      firstName: profile.getGivenName(),
+      lastName: profile.getFamilyName()
+    };
+    this.authentificate(user);
   };
 
   render() {
@@ -51,6 +65,10 @@ class Login extends React.Component<PropsWithRouter, State> {
       <Grid columns="12">
         <GridColumn width={4} />
         <GridColumn width={8}>
+          <Header as="h3">
+            In order to connect to google API, you need to login with your
+            Google account
+          </Header>
           <Form error={this.state.formError}>
             <GoogleLogin
               className="ui linkedin button"

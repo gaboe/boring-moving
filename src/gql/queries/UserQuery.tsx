@@ -7,6 +7,9 @@ const USER_QUERY = gql`
     user {
       id
       email
+      firstName
+      lastName
+      googleID
     }
   }
 `;
