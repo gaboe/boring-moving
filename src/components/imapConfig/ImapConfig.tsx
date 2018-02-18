@@ -11,6 +11,7 @@ import {
   withSaveImapConfigMutation,
   Props as MutationProps
 } from "../../gql/mutations/imapConfig/SaveImapConfigMutation";
+import { ToastContainer, toast } from "react-toastify";
 
 type State = {} & FormState;
 type Props = QueryProps & MutationProps;
@@ -24,6 +25,7 @@ class ImapConfig extends React.Component<Props, State> {
         refetchQueries: [{ query: IMAPCONFIG_QUERY }]
       });
     }
+    toast.success("Data saved", { position: toast.POSITION.TOP_RIGHT });
     console.log("object");
   };
 
@@ -52,6 +54,7 @@ class ImapConfig extends React.Component<Props, State> {
             );
           }}
         </Query>
+        <ToastContainer autoClose={2000} />
       </>
     );
   }
