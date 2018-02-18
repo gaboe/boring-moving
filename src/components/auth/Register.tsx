@@ -50,7 +50,6 @@ class Register extends React.Component<PropsWithRouter, State> {
       return;
     }
     if (this.props.mutate) {
-      console.log("mutatuin", this.state);
       this.props
         .mutate({
           variables: { email: this.state.email, password: this.state.password },

@@ -5,7 +5,7 @@ import { Home } from "./../home/Home";
 import { Login } from "./../auth/Login";
 import { RequireAuth } from "./../auth/RequireAuth";
 import { AddRule } from "../rules/AddRule";
-import { UserSettings } from "../userSettings/UserSettings";
+import { ImapConfig } from "../imapConfig/ImapConfig";
 
 const Routes = () => {
   return (
@@ -15,7 +15,7 @@ const Routes = () => {
       <Route path="/add-rule" component={RequireAuth(AddRule)} />
       <Route path="/login" component={Login} />
       {/* <Route path="/register" component={Register} /> */}
-      <Route path="/user-settings" component={RequireAuth(UserSettings)} />
+      <Route path="/user-settings" component={RequireAuth(ImapConfig)} />
     </div>
   );
 };

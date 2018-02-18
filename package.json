@@ -4,7 +4,6 @@
   "private": true,
   "homepage": "https://gaboe.github.io/boring-moving",
   "dependencies": {
-    "@types/ramda": "^0.25.17",
     "apollo-client-preset": "^1.0.6",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
@@ -35,6 +34,7 @@
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
     "@types/react-router-dom": "^4.2.3",
-    "gh-pages": "^1.1.0"
+    "gh-pages": "^1.1.0",
+    "@types/ramda": "^0.25.17"
   }
 }
