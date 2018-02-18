@@ -5,7 +5,7 @@ import { IImapConfig } from "../../models/IImapConfig";
 
 type State = {
   host: string;
-  port: number;
+  port?: number;
   userName: string;
   password: string;
   formError: boolean;
@@ -13,43 +13,59 @@ type State = {
 type ComponentProps = {
   imapConfig?: IImapConfig;
 
-  submitForm: () => void;
-  handleChange: (_: {}, data: InputOnChangeData) => void;
+  submitForm: (state: State) => void;
 };
+
 class ImapConfigForm extends React.Component<ComponentProps, State> {
+  handleChange = (_: {}, data: InputOnChangeData) =>
+    this.setState({ [data.name]: data.value, formError: false });
+
   constructor(props: ComponentProps) {
     super(props);
     this.state = {
       userName: "",
       password: "",
-      port: 993,
       host: "",
       formError: false
     };
   }
   componentWillReceiveProps(props: ComponentProps) {
-    console.log("ppp", props);
     if (props.imapConfig) {
       const config = props.imapConfig;
       this.setState({
         userName: config.userName,
-        password: "",
+        password: config.password,
         host: config.host,
         port: config.port
       });
     }
   }
 
+  submitForm = () => {
+    if (
+      !this.state.userName ||
+      !this.state.password ||
+      !this.state.host ||
+      !this.state.port
+    ) {
+      console.log(this.state);
+      return this.setState({ formError: true });
+    } else {
+      console.log("submit");
+      this.props.submitForm(this.state);
+    }
+  };
+
   render() {
     return (
       <>
-        <Form error={this.state.formError} onSubmit={this.props.submitForm}>
+        <Form error={this.state.formError} onSubmit={this.submitForm}>
           <Form.Input
             name={nameof<State>("host")}
-            label="Server"
+            label="Host"
             type="input"
             placeholder="imap.gmail.com"
-            onChange={this.props.handleChange}
+            onChange={this.handleChange}
             value={this.state.host}
           />
           <Form.Input
@@ -57,7 +73,7 @@ class ImapConfigForm extends React.Component<ComponentProps, State> {
             label="Port"
             type="input"
             placeholder="993"
-            onChange={this.props.handleChange}
+            onChange={this.handleChange}
             value={this.state.port}
           />
           <Form.Input
@@ -65,7 +81,7 @@ class ImapConfigForm extends React.Component<ComponentProps, State> {
             label="Username"
             type="input"
             placeholder="username"
-            onChange={this.props.handleChange}
+            onChange={this.handleChange}
             value={this.state.userName}
           />
           <Form.Input
@@ -73,7 +89,8 @@ class ImapConfigForm extends React.Component<ComponentProps, State> {
             label="Password"
             type="password"
             placeholder="password"
-            onChange={this.props.handleChange}
+            onChange={this.handleChange}
+            value={this.state.password}
           />
           <Message
             error={true}

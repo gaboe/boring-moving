@@ -7,6 +7,7 @@ const IMAPCONFIG_QUERY = gql`
     imapConfig {
       id
       userName
+      password
       host
       port
     }

@@ -1,69 +1,42 @@
 import * as React from "react";
-import { Header, InputOnChangeData } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 import {
-  Props,
+  Props as QueryProps,
   Response,
   IMAPCONFIG_QUERY
 } from "../../gql/queries/imapConfig/imapConfig";
 import { Query } from "react-apollo";
 import { ImapConfigForm, State as FormState } from "./ImapConfigForm";
-type State = {} & FormState;
-class ImapConfig extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      userName: "",
-      password: "",
-      port: 0,
-      host: "",
-      formError: false
-    };
-  }
-  submitForm = (): void => {
-    if (
-      !this.state.userName ||
-      !this.state.password ||
-      !this.state.host ||
-      !this.state.port
-    ) {
-      console.log(this.state);
-      return this.setState({ formError: true });
-    } else {
-      console.log("submit");
-    }
-  };
-  handleChange = (_: {}, data: InputOnChangeData) =>
-    this.setState({ [data.name]: data.value, formError: false });
+import {
+  withSaveImapConfigMutation,
+  Props as MutationProps
+} from "../../gql/mutations/imapConfig/SaveImapConfigMutation";
 
-  componentWillReceiveProps(props: Props) {
-    console.log("ppp", props);
-    if (props.data && props.data.imapConfig) {
-      const config = props.data.imapConfig;
-      this.setState({
-        userName: config.userName,
-        password: "",
-        host: config.host,
-        port: config.port
+type State = {} & FormState;
+type Props = QueryProps & MutationProps;
+
+class ImapConfig extends React.Component<Props, State> {
+  submitForm = (formState: FormState): void => {
+    const { userName, password, host, port } = formState;
+    if (this.props.mutate) {
+      this.props.mutate({
+        variables: { userName, password, host, port },
+        refetchQueries: [{ query: IMAPCONFIG_QUERY }]
       });
     }
-  }
+    console.log("object");
+  };
 
   renderForm = (response: Response) => {
     if (response.data) {
       return (
         <ImapConfigForm
-          handleChange={this.handleChange}
           submitForm={this.submitForm}
           imapConfig={response.data.imapConfig}
         />
       );
     }
-    return (
-      <ImapConfigForm
-        handleChange={this.handleChange}
-        submitForm={this.submitForm}
-      />
-    );
+    return <ImapConfigForm submitForm={this.submitForm} />;
   };
 
   render() {
@@ -71,7 +44,6 @@ class ImapConfig extends React.Component<Props, State> {
       <>
         <Query query={IMAPCONFIG_QUERY}>
           {(response: Response) => {
-            console.log("rrr", response);
             return (
               <>
                 <Header as="h1" content="Imap config" />
@@ -85,4 +57,5 @@ class ImapConfig extends React.Component<Props, State> {
   }
 }
 
-export { ImapConfig, State };
+const withMutation = withSaveImapConfigMutation(ImapConfig);
+export { withMutation as ImapConfig, State };
