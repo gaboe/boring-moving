@@ -16,18 +16,21 @@ const RulesTable: React.SFC<Props> = props => (
           <Table.HeaderCell>Sender</Table.HeaderCell>
           <Table.HeaderCell>Subject</Table.HeaderCell>
           <Table.HeaderCell>Content</Table.HeaderCell>
-          <Table.HeaderCell>Period</Table.HeaderCell>
+          <Table.HeaderCell>Period [minutes]</Table.HeaderCell>
+          <Table.HeaderCell>Folder name</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
 
       <Table.Body>
-        {props.rules.map(x => {
+        {props.rules.map((x: Rule) => {
+          console.log(x);
           return (
             <Table.Row key={x.id}>
               <Table.Cell>{x.sender}</Table.Cell>
               <Table.Cell>{x.subject}</Table.Cell>
               <Table.Cell>{x.content}</Table.Cell>
               <Table.Cell>{x.period}</Table.Cell>
+              <Table.Cell>{x.folderName}</Table.Cell>
             </Table.Row>
           );
         })}
