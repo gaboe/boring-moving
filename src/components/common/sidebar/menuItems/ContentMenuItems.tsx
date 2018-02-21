@@ -17,10 +17,10 @@ const ContentMenuItems: React.SFC<{}> = props => {
           Rules
         </Link>
       </Menu.Item>
-      <Menu.Item name="user-settings">
-        <Link to="/user-settings">
+      <Menu.Item name="imap-config">
+        <Link to="/imap-config">
           <Icon name="setting" />
-          User settings
+          Imap config
         </Link>
       </Menu.Item>
     </>

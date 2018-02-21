@@ -15,7 +15,7 @@ const Routes = () => {
       <Route path="/add-rule" component={RequireAuth(AddRule)} />
       <Route path="/login" component={Login} />
       {/* <Route path="/register" component={Register} /> */}
-      <Route path="/user-settings" component={RequireAuth(ImapConfig)} />
+      <Route path="/imap-config" component={RequireAuth(ImapConfig)} />
     </div>
   );
 };
