@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Form, InputOnChangeData, Grid, Header } from "semantic-ui-react";
+import { InputOnChangeData, Grid, Header } from "semantic-ui-react";
 
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
 import { USER_QUERY } from "./../../gql/queries/UserQuery";
@@ -8,6 +8,8 @@ import GridColumn from "semantic-ui-react/dist/commonjs/collections/Grid/GridCol
 import { GoogleLogin, GoogleLoginResponse } from "react-google-login";
 import { CSSProperties } from "react";
 import { NonAuthenificatedUser } from "../../models/User";
+
+const mushing = require("./../../mushing.jpg");
 
 const GoogleButtonStyle: CSSProperties = {};
 type State = {
@@ -62,14 +64,16 @@ class Login extends React.Component<PropsWithRouter, State> {
 
   render() {
     return (
-      <Grid columns="12">
-        <GridColumn width={4} />
-        <GridColumn width={8}>
-          <Header as="h3">
-            In order to connect to google API, you need to login with your
-            Google account
-          </Header>
-          <Form error={this.state.formError}>
+      <Grid centered={true}>
+        <Grid.Row centered={true} columns={3}>
+          <GridColumn />
+          <GridColumn>
+            <Header as="h1" content="Welcome to Boring Moving!" />
+            <Header as="h2" content="App that automates boring email moving" />
+            <Header as="h3">
+              In order to connect to google API, you need to login with your
+              Google account
+            </Header>
             <GoogleLogin
               className="ui linkedin button"
               clientId="578678813391-3khelub231ejgukuui1r4dqkg67o8p39.apps.googleusercontent.com"
@@ -78,9 +82,10 @@ class Login extends React.Component<PropsWithRouter, State> {
               onFailure={this.googleResponse}
               style={GoogleButtonStyle}
             />
-          </Form>
-        </GridColumn>
-        <GridColumn width={1} />
+          </GridColumn>
+          <GridColumn />
+        </Grid.Row>
+        <img src={mushing} />
       </Grid>
     );
   }
