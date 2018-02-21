@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Sidebar, Menu } from "semantic-ui-react";
-
-import { MenuItems } from "./MenuItems";
+import { MenuItems } from "./menuItems/MenuItems";
 
 type Props = {
   setVisibilityTrue: () => void;
