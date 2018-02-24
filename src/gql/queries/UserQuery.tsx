@@ -21,4 +21,4 @@ type Props = ChildProps<{}, {}>;
 
 const withUser = graphql<Props>(USER_QUERY);
 
-export { USER_QUERY, Response, withUser };
+export { USER_QUERY, Response, withUser, Props };

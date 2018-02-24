@@ -1,13 +1,13 @@
 import * as React from "react";
-import { Response, withUser } from "../../gql/queries/UserQuery";
+import { Response, withUser, Props } from "../../gql/queries/UserQuery";
 import { RouteComponentProps } from "react-router";
 
-type PropsWithRouter = Response & RouteComponentProps<{}>;
+type PropsWithRouter = Response & RouteComponentProps<{}> & Props;
 
 type Component = React.ComponentClass | React.SFC;
 
 const hoc = (WrappedComponent: Component) => {
-  class RequireAuth extends React.Component {
+  class RequireAuth extends React.Component<Props, {}> {
     componentWillUpdate(nextProps: PropsWithRouter) {
       if (
         nextProps &&
