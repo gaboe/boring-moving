@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import { ChildProps, graphql } from "react-apollo";
 
 const mutation = gql`
-  mutation {
+  mutation Logout {
     logout {
       id
     }

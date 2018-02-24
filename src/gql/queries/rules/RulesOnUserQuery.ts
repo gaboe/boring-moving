@@ -3,7 +3,7 @@ import { QueryResult } from "react-apollo";
 import { Rule } from "../../../models/Rule";
 
 const RULES_ON_USER_QUERY = gql`
-  {
+  query RulesOnUser {
     user {
       id
       rules {
