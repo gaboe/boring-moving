@@ -29,24 +29,22 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "codegen": "yarn get-schema && yarn generate-types",
-    "get-schema":
-      "apollo-codegen introspect-schema http://localhost:3000/graphql --output \"./src/generated/schema.json\"",
-    "generate-types":
-      "apollo-codegen generate \"./src/gql/**/*.ts\" --schema \"./src/generated/schema.json\" --target typescript --output \"./src/generated/types.ts\""
+    "get-schema": "apollo-codegen introspect-schema http://localhost:3000/graphql --output \"./src/generated/schema.json\"",
+    "generate-types": "apollo-codegen generate \"./src/gql/**/*.ts\" --schema \"./src/generated/schema.json\" --target typescript --output \"./src/generated/types.ts\""
   },
   "devDependencies": {
     "@types/graphql": "^0.12.4",
     "@types/jest": "^22.1.3",
     "@types/node": "^9.4.6",
+    "@types/prop-types": "^15.5.2",
     "@types/query-string": "^5.1.0",
     "@types/ramda": "^0.25.18",
     "@types/react": "^16.0.38",
     "@types/react-dom": "^16.0.4",
     "@types/react-router-dom": "^4.2.4",
     "@types/react-transition-group": "^2.0.7",
+    "apollo-codegen": "^0.18.6",
     "gh-pages": "^1.1.0",
-    "typescript": "^2.7.2",
-    "@types/prop-types": "^15.5.2",
-    "apollo-codegen": "^0.18.6"
+    "typescript": "^2.8.0-dev.20180224"
   }
 }

@@ -2,8 +2,9 @@ import * as React from "react";
 import { Table, Button } from "semantic-ui-react";
 import { Rule } from "../../models/Rule";
 import { Link } from "react-router-dom";
+import { RulesType } from "../../gql/queries/rules/RulesOnUserQuery";
 
-type Props = { rules: Rule[] };
+type Props = { rules: RulesType };
 
 const RulesTable: React.SFC<Props> = props => (
   <>

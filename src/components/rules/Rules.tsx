@@ -4,7 +4,7 @@ import { Header } from "semantic-ui-react";
 
 import {
   RULES_ON_USER_QUERY as query,
-  Response,
+  Props,
   getRules
 } from "./../../gql/queries/rules/RulesOnUserQuery";
 import { Table } from "./Table";
@@ -12,7 +12,7 @@ import { Table } from "./Table";
 const Rules: React.SFC<{}> = props => {
   return (
     <Query query={query}>
-      {(response: Response) => {
+      {(response: Props) => {
         return (
           <>
             <Header as="h1" icon="options" content="Rules" />
