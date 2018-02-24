@@ -3,7 +3,7 @@ import { ChildProps, graphql } from "react-apollo";
 import { LogoutMutation } from "../../../generated/types";
 
 const mutation = gql`
-  mutation {
+  mutation Logout {
     logout {
       id
     }

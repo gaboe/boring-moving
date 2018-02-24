@@ -1,6 +1,9 @@
 import gql from "graphql-tag";
-import { IImapConfig } from "../../../models/IImapConfig";
 import { ChildProps, graphql } from "react-apollo";
+import {
+  SaveImapConfigMutationVariables as Variables,
+  SaveImapConfigMutation as Mutation
+} from "../../../generated/types";
 
 const mutation = gql`
   mutation SaveImapConfig(
@@ -25,15 +28,7 @@ const mutation = gql`
   }
 `;
 
-type Response = { saveImapConfig: IImapConfig };
+type Props = ChildProps<Variables, Mutation>;
+const withSaveImapConfigMutation = graphql<Variables, Mutation>(mutation);
 
-type InputProps = {
-  userName: string;
-  password: string;
-  host: string;
-  port: number;
-};
-type Props = ChildProps<InputProps, Response>;
-const withSaveImapConfigMutation = graphql<InputProps, Response>(mutation);
-
-export { withSaveImapConfigMutation, Response, InputProps, Props };
+export { withSaveImapConfigMutation, Props };
