@@ -4,11 +4,11 @@ import { Rule } from "../../../models/Rule";
 
 const mutation = gql`
   mutation AddRule(
-    $sender: String
-    $subject: String
-    $content: String
-    $folderName: String
-    $period: Int
+    $sender: String!
+    $subject: String!
+    $content: String!
+    $folderName: String!
+    $period: Int!
   ) {
     addRule(
       sender: $sender

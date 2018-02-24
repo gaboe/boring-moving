@@ -21,7 +21,7 @@
     "styled-components-ts": "^0.0.8"
   },
   "scripts": {
-    "dev": "yarn start",
+    "dev": "yarn codegen && yarn start",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",

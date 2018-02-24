@@ -2,40 +2,40 @@
 //  This file was automatically generated and should not be edited.
 
 export interface SaveImapConfigMutationVariables {
-  userName?: string | null,
-  password?: string | null,
-  host?: string | null,
-  port?: number | null,
+  userName: string,
+  password: string,
+  host: string,
+  port: number,
 };
 
 export interface SaveImapConfigMutation {
   saveImapConfig:  {
-    userName: string | null,
-    password: string | null,
-    host: string | null,
-    port: string | null,
-    userID: string | null,
-    id: string | null,
+    userName: string,
+    password: string,
+    host: string,
+    port: string,
+    userID: string,
+    id: string,
   } | null,
 };
 
 export interface AddRuleMutationVariables {
-  sender?: string | null,
-  subject?: string | null,
-  content?: string | null,
-  folderName?: string | null,
-  period?: number | null,
+  sender: string,
+  subject: string,
+  content: string,
+  folderName: string,
+  period: number,
 };
 
 export interface AddRuleMutation {
   addRule:  {
-    id: string | null,
-    sender: string | null,
-    subject: string | null,
-    content: string | null,
-    folderName: string | null,
-    period: number | null,
-    userID: string | null,
+    id: string,
+    sender: string,
+    subject: string,
+    content: string,
+    folderName: string,
+    period: number,
+    userID: string,
   } | null,
 };
 
@@ -48,49 +48,49 @@ export interface AuthentificateMutationVariables {
 
 export interface AuthentificateMutation {
   authentificate:  {
-    id: string | null,
-    email: string | null,
-    firstName: string | null,
-    lastName: string | null,
-    googleID: string | null,
+    id: string,
+    email: string,
+    firstName: string,
+    lastName: string,
+    googleID: string,
   } | null,
 };
 
 export interface LogoutMutation {
   logout:  {
-    id: string | null,
+    id: string,
   } | null,
 };
 
 export interface RegisterMutationVariables {
-  email?: string | null,
-  password?: string | null,
+  email: string,
+  password: string,
 };
 
 export interface RegisterMutation {
   signup:  {
-    id: string | null,
-    email: string | null,
+    id: string,
+    email: string,
   } | null,
 };
 
 export interface UserQuery {
   user:  {
-    id: string | null,
-    email: string | null,
-    firstName: string | null,
-    lastName: string | null,
-    googleID: string | null,
+    id: string,
+    email: string,
+    firstName: string,
+    lastName: string,
+    googleID: string,
   } | null,
 };
 
 export interface ImapConfigQuery {
   imapConfig:  {
-    id: string | null,
-    userName: string | null,
-    password: string | null,
-    host: string | null,
-    port: string | null,
+    id: string,
+    userName: string,
+    password: string,
+    host: string,
+    port: string,
   } | null,
 };
 
@@ -100,26 +100,26 @@ export interface GetRuleByIDQueryVariables {
 
 export interface GetRuleByIDQuery {
   rule:  {
-    id: string | null,
-    sender: string | null,
-    subject: string | null,
-    content: string | null,
-    folderName: string | null,
-    period: number | null,
+    id: string,
+    sender: string,
+    subject: string,
+    content: string,
+    folderName: string,
+    period: number,
   } | null,
 };
 
 export interface RulesOnUserQuery {
   user:  {
-    id: string | null,
+    id: string,
     rules:  Array< {
-      id: string | null,
-      sender: string | null,
-      subject: string | null,
-      content: string | null,
-      period: number | null,
-      folderName: string | null,
-      userID: string | null,
+      id: string,
+      sender: string,
+      subject: string,
+      content: string,
+      period: number,
+      folderName: string,
+      userID: string,
     } | null > | null,
   } | null,
 };

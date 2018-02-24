@@ -4,10 +4,10 @@ import { ChildProps, graphql } from "react-apollo";
 
 const mutation = gql`
   mutation SaveImapConfig(
-    $userName: String
-    $password: String
-    $host: String
-    $port: Int
+    $userName: String!
+    $password: String!
+    $host: String!
+    $port: Int!
   ) {
     saveImapConfig(
       userName: $userName

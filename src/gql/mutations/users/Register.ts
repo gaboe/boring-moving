@@ -3,7 +3,7 @@ import { User } from "../../../models/User";
 import { ChildProps, graphql } from "react-apollo";
 
 const mutation = gql`
-  mutation Register($email: String, $password: String) {
+  mutation Register($email: String!, $password: String!) {
     signup(email: $email, password: $password) {
       id
       email
