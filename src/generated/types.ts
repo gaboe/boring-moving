@@ -40,10 +40,10 @@ export interface AddRuleMutation {
 };
 
 export interface AuthentificateMutationVariables {
-  googleID?: string | null,
-  firstName?: string | null,
-  lastName?: string | null,
-  email?: string | null,
+  googleID: string,
+  firstName: string,
+  lastName: string,
+  email: string,
 };
 
 export interface AuthentificateMutation {

@@ -4,10 +4,10 @@ import { User, NonAuthenificatedUser } from "../../../models/User";
 
 const mutation = gql`
   mutation Authentificate(
-    $googleID: String
-    $firstName: String
-    $lastName: String
-    $email: String
+    $googleID: String!
+    $firstName: String!
+    $lastName: String!
+    $email: String!
   ) {
     authentificate(
       googleID: $googleID
