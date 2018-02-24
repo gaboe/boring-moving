@@ -26,6 +26,7 @@ class EditRule extends React.Component<Props, State> {
   };
   render() {
     const id = (this.props.match.params as Rule).id;
+    console.log(id);
     return (
       <Query query={RULE_QUERY} variables={this.state}>
         {(response: Response) => {
