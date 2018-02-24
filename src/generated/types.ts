@@ -16,7 +16,7 @@ export interface SaveImapConfigMutation {
     port: string,
     userID: string,
     id: string,
-  } | null,
+  },
 };
 
 export interface AddRuleMutationVariables {

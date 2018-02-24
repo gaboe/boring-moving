@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
-import { QueryResult, ChildProps } from "react-apollo";
-import { IImapConfig } from "../../../models/IImapConfig";
+import { ChildProps } from "react-apollo";
+import { ImapConfigQuery } from "../../../generated/types";
 
 const IMAPCONFIG_QUERY = gql`
   query ImapConfig {
@@ -14,9 +14,6 @@ const IMAPCONFIG_QUERY = gql`
   }
 `;
 
-type Response = QueryResult<{
-  imapConfig: IImapConfig;
-}>;
-type Props = ChildProps<Response, {}>;
+type Props = ChildProps<{}, ImapConfigQuery>;
 
-export { IMAPCONFIG_QUERY, Response, Props };
+export { IMAPCONFIG_QUERY, Props };

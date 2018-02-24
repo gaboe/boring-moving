@@ -1,6 +1,9 @@
 import gql from "graphql-tag";
 import { graphql, ChildProps } from "react-apollo";
-import { Rule } from "../../../models/Rule";
+import {
+  AddRuleMutationVariables,
+  AddRuleMutation
+} from "../../../generated/types";
 
 const mutation = gql`
   mutation AddRule(
@@ -28,17 +31,10 @@ const mutation = gql`
   }
 `;
 
-type Response = { addRule: Rule };
-type InputProps = {
-  sender: string;
-  subject: string;
-  content: string;
-  folderName: string;
-  period: number;
-};
+type Props = ChildProps<AddRuleMutationVariables, AddRuleMutation>;
 
-type Props = ChildProps<InputProps, Response>;
+const withAddRuleMutation = graphql<AddRuleMutationVariables, AddRuleMutation>(
+  mutation
+);
 
-const withAddRuleMutation = graphql<InputProps, Response>(mutation);
-
-export { withAddRuleMutation, Response, InputProps, Props };
+export { withAddRuleMutation, Props };

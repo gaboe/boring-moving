@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 import { ChildProps, graphql } from "react-apollo";
 import {
-  SaveImapConfigMutationVariables as Variables,
-  SaveImapConfigMutation as Mutation
+  SaveImapConfigMutationVariables,
+  SaveImapConfigMutation
 } from "../../../generated/types";
 
 const mutation = gql`
@@ -28,7 +28,14 @@ const mutation = gql`
   }
 `;
 
-type Props = ChildProps<Variables, Mutation>;
-const withSaveImapConfigMutation = graphql<Variables, Mutation>(mutation);
+type Props = ChildProps<
+  SaveImapConfigMutationVariables,
+  SaveImapConfigMutation
+>;
+
+const withSaveImapConfigMutation = graphql<
+  SaveImapConfigMutationVariables,
+  SaveImapConfigMutation
+>(mutation);
 
 export { withSaveImapConfigMutation, Props };

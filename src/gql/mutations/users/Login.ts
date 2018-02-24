@@ -1,6 +1,9 @@
 import gql from "graphql-tag";
 import { graphql, ChildProps } from "react-apollo";
-import { User, NonAuthenificatedUser } from "../../../models/User";
+import {
+  AuthentificateMutationVariables,
+  AuthentificateMutation
+} from "../../../generated/types";
 
 const mutation = gql`
   mutation Authentificate(
@@ -24,11 +27,14 @@ const mutation = gql`
   }
 `;
 
-type Response = { user: User };
-type InputProps = NonAuthenificatedUser;
+type Props = ChildProps<
+  AuthentificateMutationVariables,
+  AuthentificateMutation
+>;
 
-type Props = ChildProps<InputProps, Response>;
+const withLoginMutation = graphql<
+  AuthentificateMutationVariables,
+  AuthentificateMutation
+>(mutation);
 
-const withLoginMutation = graphql<InputProps, Response>(mutation);
-
-export { withLoginMutation, Response, InputProps, Props };
+export { withLoginMutation, Props };

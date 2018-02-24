@@ -1,52 +1,59 @@
 import * as React from "react";
 import { Message, Form, Button, InputOnChangeData } from "semantic-ui-react";
 import { nameof } from "../../utils/Reflection";
-import { IImapConfig } from "../../models/IImapConfig";
+import { SaveImapConfigMutation } from "../../generated/types";
+
+type Imap = SaveImapConfigMutation["saveImapConfig"];
 
 type State = {
-  host: string;
-  port?: number;
-  userName: string;
-  password: string;
+  imap?: Imap;
   formError: boolean;
 };
 type ComponentProps = {
-  imapConfig?: IImapConfig;
-
+  imapConfig?: Imap;
   submitForm: (state: State) => void;
 };
 
 class ImapConfigForm extends React.Component<ComponentProps, State> {
-  handleChange = (_: {}, data: InputOnChangeData) =>
-    this.setState({ [data.name]: data.value, formError: false });
+  handleChange = (_: {}, data: InputOnChangeData) => {
+    const newImap = { [data.name]: data.value };
+    if (this.state.imap) {
+      this.setState({
+        imap: Object.assign(this.state.imap, newImap),
+        formError: false
+      });
+    } else {
+      this.setState({
+        imap: newImap as Imap,
+        formError: false
+      });
+    }
+    console.log(this.state);
+  };
 
   constructor(props: ComponentProps) {
     super(props);
     this.state = {
-      userName: "",
-      password: "",
-      host: "",
-      formError: false
+      formError: false,
+      imap: props.imapConfig
     };
   }
   componentWillReceiveProps(props: ComponentProps) {
     if (props.imapConfig) {
       const config = props.imapConfig;
       this.setState({
-        userName: config.userName,
-        password: config.password,
-        host: config.host,
-        port: config.port
+        imap: config
       });
     }
   }
 
   submitForm = () => {
     if (
-      !this.state.userName ||
-      !this.state.password ||
-      !this.state.host ||
-      !this.state.port
+      !this.state.imap ||
+      !this.state.imap.userName ||
+      !this.state.imap.password ||
+      !this.state.imap.host ||
+      !this.state.imap.port
     ) {
       console.log(this.state);
       return this.setState({ formError: true });
@@ -61,36 +68,36 @@ class ImapConfigForm extends React.Component<ComponentProps, State> {
       <>
         <Form error={this.state.formError} onSubmit={this.submitForm}>
           <Form.Input
-            name={nameof<State>("host")}
+            name={nameof<Imap>("host")}
             label="Host"
             type="input"
             placeholder="imap.gmail.com"
             onChange={this.handleChange}
-            value={this.state.host}
+            value={this.state.imap && this.state.imap.host}
           />
           <Form.Input
-            name={nameof<State>("port")}
+            name={nameof<Imap>("port")}
             label="Port"
             type="input"
             placeholder="993"
             onChange={this.handleChange}
-            value={this.state.port}
+            value={this.state.imap && this.state.imap.port}
           />
           <Form.Input
-            name={nameof<State>("userName")}
+            name={nameof<Imap>("userName")}
             label="Username"
             type="input"
             placeholder="username"
             onChange={this.handleChange}
-            value={this.state.userName}
+            value={this.state.imap && this.state.imap.userName}
           />
           <Form.Input
-            name={nameof<State>("password")}
+            name={nameof<Imap>("password")}
             label="Password"
             type="password"
             placeholder="password"
             onChange={this.handleChange}
-            value={this.state.password}
+            value={this.state.imap && this.state.imap.password}
           />
           <Message
             error={true}
