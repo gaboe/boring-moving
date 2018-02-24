@@ -3,7 +3,7 @@ import { User } from "../../models/User";
 import { QueryResult, ChildProps, graphql } from "react-apollo";
 
 const USER_QUERY = gql`
-  {
+  query User {
     user {
       id
       email
