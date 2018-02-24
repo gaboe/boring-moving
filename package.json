@@ -7,6 +7,7 @@
     "apollo-client-preset": "^1.0.6",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
+    "query-string": "^5.1.0",
     "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-apollo": "^2.1.0-beta.0",
@@ -36,7 +37,8 @@
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
     "@types/react-router-dom": "^4.2.3",
-    "gh-pages": "^1.1.0",
-    "@types/react-transition-group": "^2.0.7"
+    "@types/react-transition-group": "^2.0.7",
+    "@types/query-string": "^5.1.0",
+    "gh-pages": "^1.1.0"
   }
 }

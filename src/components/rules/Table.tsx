@@ -18,12 +18,12 @@ const RulesTable: React.SFC<Props> = props => (
           <Table.HeaderCell>Content</Table.HeaderCell>
           <Table.HeaderCell>Period [minutes]</Table.HeaderCell>
           <Table.HeaderCell>Folder name</Table.HeaderCell>
+          <Table.HeaderCell>Edit rule</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
 
       <Table.Body>
         {props.rules.map((x: Rule) => {
-          console.log(x);
           return (
             <Table.Row key={x.id}>
               <Table.Cell>{x.sender}</Table.Cell>
@@ -31,6 +31,11 @@ const RulesTable: React.SFC<Props> = props => (
               <Table.Cell>{x.content}</Table.Cell>
               <Table.Cell>{x.period}</Table.Cell>
               <Table.Cell>{x.folderName}</Table.Cell>
+              <Table.Cell>
+                <Link to={`/edit-rule/${x.id}`}>
+                  <Button content="Edit" />
+                </Link>
+              </Table.Cell>
             </Table.Row>
           );
         })}

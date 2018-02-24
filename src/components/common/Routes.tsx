@@ -6,6 +6,7 @@ import { Login } from "./../auth/Login";
 import { RequireAuth } from "./../auth/RequireAuth";
 import { AddRule } from "../rules/AddRule";
 import { ImapConfig } from "../imapConfig/ImapConfig";
+import { EditRule } from "../rules/EditRule";
 
 const Routes = () => {
   return (
@@ -13,6 +14,7 @@ const Routes = () => {
       <Route exact={true} path="/" component={Home} />
       <Route path="/rules" component={RequireAuth(Rules)} />
       <Route path="/add-rule" component={RequireAuth(AddRule)} />
+      <Route path="/edit-rule/:id" component={RequireAuth(EditRule)} />
       <Route path="/login" component={Login} />
       {/* <Route path="/register" component={Register} /> */}
       <Route path="/imap-config" component={RequireAuth(ImapConfig)} />
