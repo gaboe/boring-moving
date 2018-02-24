@@ -5,9 +5,10 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 
 #codegen
-gql-gen --url http://localhost:3000/graphql  --template typescript --out ./typings/
-apollo-codegen generate ./src/gql/**/*.ts --schema schema.json --target typescript --output operation-result-types.ts
+apollo-codegen introspect-schema http://localhost:3000/graphql --output ./src/generated/schema.json
+apollo-codegen generate ./src/gql/**/*.ts --schema ./src/generated/schema.json --target typescript --output ./src/generated/types.ts
 
+gql-gen --url http://localhost:3000/graphql  --template typescript --out ./typings/
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
