@@ -29,8 +29,10 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "codegen": "yarn get-schema && yarn generate-types",
-    "get-schema": "apollo-codegen introspect-schema http://localhost:3000/graphql --output \"./src/generated/schema.json\"",
-    "generate-types": "apollo-codegen generate \"./src/gql/**/*.ts\" --schema \"./src/generated/schema.json\" --target typescript --output \"./src/generated/types.ts\""
+    "get-schema":
+      "apollo-codegen introspect-schema http://localhost:3000/graphql --output \"./src/generated/schema.json\"",
+    "generate-types":
+      "apollo-codegen generate \"./src/gql/**/*.ts\" --schema \"./src/generated/schema.json\" --target typescript --output \"./src/generated/types.ts\" --addTypename"
   },
   "devDependencies": {
     "@types/graphql": "^0.12.4",

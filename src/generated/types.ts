@@ -10,6 +10,7 @@ export interface SaveImapConfigMutationVariables {
 
 export interface SaveImapConfigMutation {
   saveImapConfig:  {
+    __typename: "ImapConfigType",
     userName: string,
     password: string,
     host: string,
@@ -29,6 +30,7 @@ export interface AddRuleMutationVariables {
 
 export interface AddRuleMutation {
   addRule:  {
+    __typename: "RuleType",
     id: string,
     sender: string,
     subject: string,
@@ -48,6 +50,7 @@ export interface AuthentificateMutationVariables {
 
 export interface AuthentificateMutation {
   authentificate:  {
+    __typename: "UserType",
     id: string,
     email: string,
     firstName: string,
@@ -58,6 +61,7 @@ export interface AuthentificateMutation {
 
 export interface LogoutMutation {
   logout:  {
+    __typename: "UserType",
     id: string,
   } | null,
 };
@@ -69,6 +73,7 @@ export interface RegisterMutationVariables {
 
 export interface RegisterMutation {
   signup:  {
+    __typename: "UserType",
     id: string,
     email: string,
   } | null,
@@ -76,6 +81,7 @@ export interface RegisterMutation {
 
 export interface UserQuery {
   user:  {
+    __typename: "UserType",
     id: string,
     email: string,
     firstName: string,
@@ -86,6 +92,7 @@ export interface UserQuery {
 
 export interface ImapConfigQuery {
   imapConfig:  {
+    __typename: "ImapConfigType",
     id: string,
     userName: string,
     password: string,
@@ -100,6 +107,7 @@ export interface GetRuleByIDQueryVariables {
 
 export interface GetRuleByIDQuery {
   rule:  {
+    __typename: "RuleType",
     id: string,
     sender: string,
     subject: string,
@@ -111,8 +119,10 @@ export interface GetRuleByIDQuery {
 
 export interface RulesOnUserQuery {
   user:  {
+    __typename: "UserType",
     id: string,
     rules:  Array< {
+      __typename: "RuleType",
       id: string,
       sender: string,
       subject: string,
@@ -120,6 +130,6 @@ export interface RulesOnUserQuery {
       period: number,
       folderName: string,
       userID: string,
-    } | null > | null,
+    } > | null,
   } | null,
 };

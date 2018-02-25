@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Table, Button } from "semantic-ui-react";
-import { Rule } from "../../models/Rule";
 import { Link } from "react-router-dom";
 import { RulesType } from "../../gql/queries/rules/RulesOnUserQuery";
 
@@ -24,7 +23,7 @@ const RulesTable: React.SFC<Props> = props => (
       </Table.Header>
 
       <Table.Body>
-        {props.rules.map((x: Rule) => {
+        {props.rules.map(x => {
           return (
             <Table.Row key={x.id}>
               <Table.Cell>{x.sender}</Table.Cell>
