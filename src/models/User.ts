@@ -1,5 +1,3 @@
-import { Rule } from "./Rule";
-
 type NonAuthenificatedUser = {
   googleID: string;
   email: string;
@@ -9,7 +7,6 @@ type NonAuthenificatedUser = {
 
 type User = {
   id: string;
-  rules: Rule[];
 } & NonAuthenificatedUser;
 
 export { User, NonAuthenificatedUser };

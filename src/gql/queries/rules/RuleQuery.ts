@@ -1,6 +1,9 @@
 import gql from "graphql-tag";
-import { QueryResult, ChildProps } from "react-apollo";
-import { Rule } from "../../../models/Rule";
+import { Query } from "react-apollo";
+import {
+  GetRuleByIDQuery,
+  GetRuleByIDQueryVariables
+} from "../../../generated/types";
 
 const RULE_QUERY = gql`
   query GetRuleByID($id: ID!) {
@@ -15,6 +18,6 @@ const RULE_QUERY = gql`
   }
 `;
 
-type Response = QueryResult<{ rule: Rule }>;
-type InputProps = ChildProps<{ id: string }, Response>;
-export { RULE_QUERY, Response, InputProps };
+class RuleQuery extends Query<GetRuleByIDQuery, GetRuleByIDQueryVariables> {}
+
+export { RULE_QUERY, RuleQuery };
