@@ -3,10 +3,24 @@ import { Header } from "semantic-ui-react";
 
 import {
   RULES_ON_USER_QUERY as query,
-  getRules,
-  RulesOnQueryComponent
+  RulesOnQueryComponent,
+  RulesType
 } from "./../../gql/queries/rules/RulesOnUserQuery";
 import { Table } from "./Table";
+import { QueryResult } from "react-apollo";
+import { RulesOnUserQuery } from "../../generated/types";
+
+const getRules = (response: QueryResult<RulesOnUserQuery, {}>): RulesType => {
+  if (
+    response.data &&
+    response.data.user &&
+    response.data.user &&
+    response.data.user.rules
+  ) {
+    return response.data.user.rules;
+  }
+  return [];
+};
 
 const Rules: React.SFC<{}> = props => {
   return (
