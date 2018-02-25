@@ -3,7 +3,7 @@ import { Table, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { RulesType } from "../../gql/queries/rules/RulesOnUserQuery";
 
-type Props = { rules: RulesType };
+type Props = { rules: RulesType; onDelete: (ruleID: string) => void };
 
 const RulesTable: React.SFC<Props> = props => (
   <>
@@ -18,7 +18,7 @@ const RulesTable: React.SFC<Props> = props => (
           <Table.HeaderCell>Content</Table.HeaderCell>
           <Table.HeaderCell>Period [minutes]</Table.HeaderCell>
           <Table.HeaderCell>Folder name</Table.HeaderCell>
-          <Table.HeaderCell>Edit rule</Table.HeaderCell>
+          <Table.HeaderCell>Actions</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
 
@@ -35,6 +35,7 @@ const RulesTable: React.SFC<Props> = props => (
                 <Link to={`/edit-rule/${x.id}`}>
                   <Button content="Edit" />
                 </Link>
+                <Button content="Delete" onClick={() => props.onDelete(x.id)} />
               </Table.Cell>
             </Table.Row>
           );

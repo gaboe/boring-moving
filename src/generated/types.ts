@@ -41,6 +41,17 @@ export interface AddRuleMutation {
   } | null,
 };
 
+export interface DeleteRuleMutationVariables {
+  id: string,
+};
+
+export interface DeleteRuleMutation {
+  deleteRule:  {
+    __typename: "RuleType",
+    id: string,
+  } | null,
+};
+
 export interface AuthentificateMutationVariables {
   googleID: string,
   firstName: string,
