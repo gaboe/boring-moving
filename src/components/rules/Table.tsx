@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Table, Button } from "semantic-ui-react";
+import { Table, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { RulesType } from "../../gql/queries/rules/RulesOnUserQuery";
 
@@ -18,7 +18,7 @@ const RulesTable: React.SFC<Props> = props => (
           <Table.HeaderCell>Content</Table.HeaderCell>
           <Table.HeaderCell>Period [minutes]</Table.HeaderCell>
           <Table.HeaderCell>Folder name</Table.HeaderCell>
-          <Table.HeaderCell>Actions</Table.HeaderCell>
+          <Table.HeaderCell />
         </Table.Row>
       </Table.Header>
 
@@ -33,9 +33,14 @@ const RulesTable: React.SFC<Props> = props => (
               <Table.Cell>{x.folderName}</Table.Cell>
               <Table.Cell>
                 <Link to={`/edit-rule/${x.id}`}>
-                  <Button content="Edit" />
+                  <Icon name="pencil" size="large" color="black" link={true} />
                 </Link>
-                <Button content="Delete" onClick={() => props.onDelete(x.id)} />
+                <Icon
+                  name="trash"
+                  onClick={() => props.onDelete(x.id)}
+                  size="large"
+                  link={true}
+                />
               </Table.Cell>
             </Table.Row>
           );
