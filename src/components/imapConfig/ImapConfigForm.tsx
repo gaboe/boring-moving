@@ -19,7 +19,7 @@ class ImapConfigForm extends React.Component<ComponentProps, State> {
     const newImap = { [data.name]: data.value };
     if (this.state.imap) {
       this.setState({
-        imap: Object.assign(this.state.imap, newImap),
+        imap: { ...this.state.imap, ...newImap },
         formError: false
       });
     } else {

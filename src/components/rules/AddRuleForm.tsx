@@ -54,7 +54,7 @@ class AddRuleForm extends React.Component<Props, State> {
     const changedRule = { [data.name]: data.value };
     if (this.state.rule) {
       this.setState({
-        rule: Object.assign(this.state.rule, changedRule),
+        rule: { ...this.state.rule, ...changedRule },
         errors: []
       });
     } else {
