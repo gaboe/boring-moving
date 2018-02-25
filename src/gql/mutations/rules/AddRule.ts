@@ -8,8 +8,8 @@ import {
 const mutation = gql`
   mutation AddRule(
     $sender: String!
-    $subject: String!
-    $content: String!
+    $subject: String
+    $content: String
     $folderName: String!
     $period: Int!
   ) {
