@@ -9,14 +9,11 @@ import {
   Props
 } from "./../../gql/mutations/rules/AddRule";
 import { RouterProps } from "react-router";
+import { AddRuleMutationVariables } from "../../generated/types";
+
 type State = {
-  sender: string;
-  subject: string;
-  content: string;
-  folderName: string;
-  period: number;
   errors: string[];
-};
+} & AddRuleMutationVariables;
 type PropsWithRouter = Props & RouterProps;
 
 class AddRule extends React.Component<PropsWithRouter, State> {
