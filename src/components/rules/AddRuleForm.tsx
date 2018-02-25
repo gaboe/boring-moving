@@ -171,17 +171,19 @@ class AddRuleForm extends React.Component<Props, State> {
             </Form.Field>
           </Form.Group>
         </Form>
-
-        <Link to="/rules">
+        <Button.Group>
+          <Link to="/rules">
+            <ButtonStyle>
+              <Button>Back</Button>
+            </ButtonStyle>
+          </Link>
+          <Button.Or />
           <ButtonStyle>
-            <Button>Back</Button>
+            <Button positive={true} onClick={this.onSubmit} color="linkedin">
+              Confirm
+            </Button>
           </ButtonStyle>
-        </Link>
-        <ButtonStyle>
-          <Button onClick={this.onSubmit} color="linkedin">
-            Confirm
-          </Button>
-        </ButtonStyle>
+        </Button.Group>
       </>
     );
   }

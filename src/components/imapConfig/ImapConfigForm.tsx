@@ -55,10 +55,8 @@ class ImapConfigForm extends React.Component<ComponentProps, State> {
       !this.state.imap.host ||
       !this.state.imap.port
     ) {
-      console.log(this.state);
       return this.setState({ formError: true });
     } else {
-      console.log("submit");
       this.props.submitForm(this.state);
     }
   };
@@ -105,7 +103,7 @@ class ImapConfigForm extends React.Component<ComponentProps, State> {
             content={`Everything must be filled`}
           />
           <Button color="linkedin" type="submit">
-            Submit
+            Save
           </Button>
         </Form>
       </>
