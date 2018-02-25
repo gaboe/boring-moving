@@ -1,6 +1,5 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
-import { Rule } from "../../models/Rule";
 import { Query } from "react-apollo";
 import {
   RULE_QUERY,
@@ -9,9 +8,11 @@ import {
 } from "../../gql/queries/rules/RuleQuery";
 import { AddRuleForm } from "./AddRuleForm";
 import { InputOnChangeData } from "semantic-ui-react";
-// import { extract } from "query-string";
+import { AddRuleMutation } from "../../generated/types";
+
 type Props = RouteComponentProps<{}> & InputProps;
 type State = { errors: string[] };
+type RuleType = NonNullable<AddRuleMutation["addRule"]>;
 
 class EditRule extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -25,7 +26,7 @@ class EditRule extends React.Component<Props, State> {
     console.log("object");
   };
   render() {
-    const id = (this.props.match.params as Rule).id;
+    const id = (this.props.match.params as RuleType).id;
     console.log(id);
     return (
       <Query query={RULE_QUERY} variables={this.state}>
