@@ -18,6 +18,8 @@ const RULE_QUERY = gql`
   }
 `;
 
+type RuleType = GetRuleByIDQuery["rule"];
+
 class RuleQuery extends Query<GetRuleByIDQuery, GetRuleByIDQueryVariables> {}
 
-export { RULE_QUERY, RuleQuery };
+export { RULE_QUERY, RuleQuery, RuleType };

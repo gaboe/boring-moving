@@ -1,20 +1,11 @@
 import * as React from "react";
-import {
-  Form,
-  Input,
-  Header,
-  Button,
-  InputOnChangeData
-} from "semantic-ui-react";
+import { Form, Input, Button, InputOnChangeData } from "semantic-ui-react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { nameof } from "../../utils/Reflection";
-import { contains } from "ramda";
+import { contains, append } from "ramda";
 import { AddRuleMutationVariables } from "../../generated/types";
-
-const HeaderStyle = styled.header`
-  padding-bottom: 3em;
-`;
+import { RuleType } from "../../gql/queries/rules/RuleQuery";
 
 const ButtonStyle = styled.span`
   padding-top: 1em;
@@ -22,117 +13,178 @@ const ButtonStyle = styled.span`
 `;
 
 type Props = {
-  handleChange: (_: {}, data: InputOnChangeData) => void;
-  onSubmit: () => void;
+  onSubmit: (rule: RuleType) => void;
   errorMessage?: string;
-  errors: string[];
+  rule?: RuleType;
 };
 
-const AddRuleForm: React.SFC<Props> = props => (
-  <>
-    <HeaderStyle>
-      <Header as="h1" content="Create new rule" />
-    </HeaderStyle>
+type State = {
+  rule?: RuleType;
+  errors: string[];
+};
+class AddRuleForm extends React.Component<Props, State> {
+  onSubmit = () => {
+    let errors: string[] = [];
+    if (
+      !this.state.rule ||
+      !this.state.rule.period ||
+      !Number.isInteger(Number(this.state.rule.period))
+    ) {
+      errors = append(nameof<NonNullable<RuleType>>("period"), errors);
+    }
+    if (!this.state.rule || !this.state.rule.sender) {
+      errors = append(nameof<NonNullable<RuleType>>("sender"), errors);
+    }
+    if (!this.state.rule || !this.state.rule.folderName) {
+      errors = append(nameof<NonNullable<RuleType>>("folderName"), errors);
+    }
+    if (errors.length > 0) {
+      return this.setState({ errors });
+    }
+    if (this.state.rule) {
+      this.props.onSubmit(this.state.rule);
+    }
+  };
+  constructor(props: Props) {
+    super(props);
+    this.state = { rule: props.rule, errors: [] };
+  }
 
-    <Form>
-      <Form.Group inline={true}>
-        <Form.Field
-          error={contains(
-            nameof<AddRuleMutationVariables>("sender"),
-            props.errors
-          )}
-        >
-          <label>I am bored moving emails from</label>
-          <Input
-            label={{ icon: "asterisk" }}
-            labelPosition="left corner"
-            placeholder="email@something.com"
-            name={nameof<AddRuleMutationVariables>("sender")}
-            onChange={props.handleChange}
-            error={contains(
-              nameof<AddRuleMutationVariables>("sender"),
-              props.errors
-            )}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>with subject</label>
-          <Input
-            placeholder="Hi this is us, again"
-            name={nameof<AddRuleMutationVariables>("subject")}
-            onChange={props.handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>and these emails usually have content like </label>
-          <Input
-            placeholder="everything is ol'right"
-            name={nameof<AddRuleMutationVariables>("content")}
-            onChange={props.handleChange}
-          />
-        </Form.Field>
-      </Form.Group>
-    </Form>
+  handleChange = (_: {}, data: InputOnChangeData) => {
+    const changedRule = { [data.name]: data.value };
+    if (this.state.rule) {
+      this.setState({
+        rule: Object.assign(this.state.rule, changedRule),
+        errors: []
+      });
+    } else {
+      this.setState({
+        rule: changedRule as RuleType,
+        errors: []
+      });
+    }
+  };
 
-    <Form>
-      <Form.Group inline={true}>
-        <Form.Field
-          error={contains(
-            nameof<AddRuleMutationVariables>("folderName"),
-            props.errors
-          )}
-        >
-          <label>
-            And it would be nice to move this emails to folder named
-          </label>
-          <Input
-            label={{ icon: "asterisk" }}
-            labelPosition="left corner"
-            placeholder="cool folder name"
-            name={nameof<AddRuleMutationVariables>("folderName")}
-            onChange={props.handleChange}
-            error={contains(
-              nameof<AddRuleMutationVariables>("folderName"),
-              props.errors
-            )}
-          />
-        </Form.Field>
-        <Form.Field
-          error={contains(
-            nameof<AddRuleMutationVariables>("period"),
-            props.errors
-          )}
-        >
-          <label>after</label>
-          <Input
-            label={{ icon: "asterisk" }}
-            labelPosition="left corner"
-            placeholder="5"
-            name={nameof<AddRuleMutationVariables>("period")}
-            onChange={props.handleChange}
-            error={contains(
-              nameof<AddRuleMutationVariables>("period"),
-              props.errors
-            )}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>minutes after receiving them.</label>
-        </Form.Field>
-      </Form.Group>
-    </Form>
+  componentWillReceiveProps(props: Props) {
+    console.log("received", props);
 
-    <Link to="/rules">
-      <ButtonStyle>
-        <Button>Back</Button>
-      </ButtonStyle>
-    </Link>
-    <ButtonStyle>
-      <Button onClick={props.onSubmit} color="linkedin">
-        Confirm
-      </Button>
-    </ButtonStyle>
-  </>
-);
+    if (props.rule) {
+      const rule = props.rule;
+      this.setState({
+        rule
+      });
+    }
+  }
+
+  render() {
+    return (
+      <>
+        <Form>
+          <Form.Group inline={true}>
+            <Form.Field
+              error={contains(
+                nameof<AddRuleMutationVariables>("sender"),
+                this.state.errors
+              )}
+            >
+              <label>I am bored moving emails from</label>
+              <Input
+                label={{ icon: "asterisk" }}
+                labelPosition="left corner"
+                placeholder="email@something.com"
+                name={nameof<AddRuleMutationVariables>("sender")}
+                onChange={this.handleChange}
+                error={contains(
+                  nameof<AddRuleMutationVariables>("sender"),
+                  this.state.errors
+                )}
+                value={this.state.rule && this.state.rule.sender}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>with subject</label>
+              <Input
+                placeholder="Hi this is us, again"
+                name={nameof<AddRuleMutationVariables>("subject")}
+                onChange={this.handleChange}
+                value={this.state.rule && this.state.rule.subject}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>and these emails usually have content like </label>
+              <Input
+                placeholder="everything is ol'right"
+                name={nameof<AddRuleMutationVariables>("content")}
+                onChange={this.handleChange}
+                value={this.state.rule && this.state.rule.content}
+              />
+            </Form.Field>
+          </Form.Group>
+        </Form>
+
+        <Form>
+          <Form.Group inline={true}>
+            <Form.Field
+              error={contains(
+                nameof<AddRuleMutationVariables>("folderName"),
+                this.state.errors
+              )}
+            >
+              <label>
+                And it would be nice to move this emails to folder named
+              </label>
+              <Input
+                label={{ icon: "asterisk" }}
+                labelPosition="left corner"
+                placeholder="cool folder name"
+                name={nameof<AddRuleMutationVariables>("folderName")}
+                onChange={this.handleChange}
+                error={contains(
+                  nameof<AddRuleMutationVariables>("folderName"),
+                  this.state.errors
+                )}
+                value={this.state.rule && this.state.rule.folderName}
+              />
+            </Form.Field>
+            <Form.Field
+              error={contains(
+                nameof<AddRuleMutationVariables>("period"),
+                this.state.errors
+              )}
+            >
+              <label>after</label>
+              <Input
+                label={{ icon: "asterisk" }}
+                labelPosition="left corner"
+                placeholder="5"
+                name={nameof<AddRuleMutationVariables>("period")}
+                onChange={this.handleChange}
+                error={contains(
+                  nameof<AddRuleMutationVariables>("period"),
+                  this.state.errors
+                )}
+                value={this.state.rule && this.state.rule.period}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>minutes after receiving them.</label>
+            </Form.Field>
+          </Form.Group>
+        </Form>
+
+        <Link to="/rules">
+          <ButtonStyle>
+            <Button>Back</Button>
+          </ButtonStyle>
+        </Link>
+        <ButtonStyle>
+          <Button onClick={this.onSubmit} color="linkedin">
+            Confirm
+          </Button>
+        </ButtonStyle>
+      </>
+    );
+  }
+}
 
 export { AddRuleForm };

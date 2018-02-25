@@ -1,8 +1,7 @@
 import * as React from "react";
 import { AddRuleForm } from "./AddRuleForm";
-import { InputOnChangeData } from "semantic-ui-react";
-import { append } from "ramda";
-import { nameof } from "../../utils/Reflection";
+import { InputOnChangeData, Header } from "semantic-ui-react";
+
 import { RULES_ON_USER_QUERY } from "./../../gql/queries/rules/RulesOnUserQuery";
 import {
   withAddRuleMutation,
@@ -10,11 +9,17 @@ import {
 } from "./../../gql/mutations/rules/AddRule";
 import { RouterProps } from "react-router";
 import { AddRuleMutationVariables } from "../../generated/types";
+import styled from "styled-components";
+import { RuleType } from "../../gql/queries/rules/RuleQuery";
 
 type State = {
   errors: string[];
 } & AddRuleMutationVariables;
 type PropsWithRouter = Props & RouterProps;
+
+const HeaderStyle = styled.header`
+  padding-bottom: 3em;
+`;
 
 class AddRule extends React.Component<PropsWithRouter, State> {
   constructor(props: PropsWithRouter) {
@@ -33,26 +38,9 @@ class AddRule extends React.Component<PropsWithRouter, State> {
     this.setState({ [data.name]: data.value, errors: [] });
   };
 
-  onSubmit = () => {
-    let errors: string[] = [];
-    if (!this.state.period || !Number.isInteger(Number(this.state.period))) {
-      errors = append(nameof<State>("period"), errors);
-    }
-    if (!this.state.sender) {
-      errors = append(nameof<State>("sender"), errors);
-    }
-    if (!this.state.folderName) {
-      errors = append(nameof<State>("folderName"), errors);
-    }
-    if (errors.length > 0) {
-      return this.setState({ errors });
-    }
-    this.addMutation();
-  };
-
-  addMutation() {
+  addMutation = (rule: NonNullable<RuleType>) => {
     if (this.props.mutate) {
-      const { sender, content, subject, folderName, period } = this.state;
+      const { sender, content, subject, folderName, period } = rule;
       this.props
         .mutate({
           variables: { sender, subject, content, folderName, period },
@@ -62,16 +50,15 @@ class AddRule extends React.Component<PropsWithRouter, State> {
           this.props.history.push("/rules");
         });
     }
-  }
+  };
 
   render() {
     return (
       <>
-        <AddRuleForm
-          handleChange={this.handleChange}
-          onSubmit={this.onSubmit}
-          errors={this.state.errors}
-        />
+        <HeaderStyle>
+          <Header as="h1" content="Create new rule" />
+        </HeaderStyle>
+        <AddRuleForm onSubmit={this.addMutation} />
       </>
     );
   }
