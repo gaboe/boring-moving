@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Table, Button, Icon } from "semantic-ui-react";
+import { Table, Icon, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { RulesType } from "../../gql/queries/rules/RulesOnUserQuery";
 
@@ -8,7 +8,10 @@ type Props = { rules: RulesType; onDelete: (ruleID: string) => void };
 const RulesTable: React.SFC<Props> = props => (
   <>
     <Link to="/add-rule">
-      <Button color="linkedin">Add rule</Button>
+      <Button icon={true} labelPosition="right">
+        Add rule
+        <Icon name="plus" color="black" link={true} />
+      </Button>
     </Link>
     <Table>
       <Table.Header>
