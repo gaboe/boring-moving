@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { ChildProps } from "react-apollo";
+import { Query } from "react-apollo";
 import { ImapConfigQuery } from "../../../generated/types";
 
 const IMAPCONFIG_QUERY = gql`
@@ -14,6 +14,6 @@ const IMAPCONFIG_QUERY = gql`
   }
 `;
 
-type Props = ChildProps<{}, ImapConfigQuery>;
+class ImapConfigQueryComponent extends Query<ImapConfigQuery, {}> {}
 
-export { IMAPCONFIG_QUERY, Props };
+export { IMAPCONFIG_QUERY, ImapConfigQueryComponent };

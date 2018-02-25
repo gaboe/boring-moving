@@ -1,18 +1,17 @@
 import * as React from "react";
-import { Query } from "react-apollo";
 import { Header } from "semantic-ui-react";
 
 import {
   RULES_ON_USER_QUERY as query,
-  Props,
-  getRules
+  getRules,
+  RulesOnQueryComponent
 } from "./../../gql/queries/rules/RulesOnUserQuery";
 import { Table } from "./Table";
 
 const Rules: React.SFC<{}> = props => {
   return (
-    <Query query={query}>
-      {(response: Props) => {
+    <RulesOnQueryComponent query={query}>
+      {response => {
         return (
           <>
             <Header as="h1" icon="options" content="Rules" />
@@ -24,7 +23,7 @@ const Rules: React.SFC<{}> = props => {
           </>
         );
       }}
-    </Query>
+    </RulesOnQueryComponent>
   );
 };
 

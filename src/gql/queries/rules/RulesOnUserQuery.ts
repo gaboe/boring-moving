@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { ChildProps } from "react-apollo";
+import { Query, QueryResult } from "react-apollo";
 import { RulesOnUserQuery } from "../../../generated/types";
 
 const RULES_ON_USER_QUERY = gql`
@@ -19,10 +19,11 @@ const RULES_ON_USER_QUERY = gql`
   }
 `;
 
-type Props = ChildProps<{}, RulesOnUserQuery>;
 type RulesType = NonNullable<NonNullable<RulesOnUserQuery["user"]>["rules"]>;
 
-const getRules = (response: Props): RulesType => {
+class RulesOnQueryComponent extends Query<RulesOnUserQuery, {}> {}
+
+const getRules = (response: QueryResult<RulesOnUserQuery, {}>): RulesType => {
   if (
     response.data &&
     response.data.user &&
@@ -34,4 +35,4 @@ const getRules = (response: Props): RulesType => {
   return [];
 };
 
-export { RULES_ON_USER_QUERY, Props, getRules, RulesType };
+export { RULES_ON_USER_QUERY, getRules, RulesType, RulesOnQueryComponent };
