@@ -112,6 +112,24 @@ export interface ImapConfigQuery {
   } | null,
 };
 
+export interface GetMostActiveRuleQueryVariables {
+  id: number,
+};
+
+export interface GetMostActiveRuleQuery {
+  mostActiveRules:  Array< {
+    __typename: "MetaStatType",
+    rule:  {
+      __typename: "RuleType",
+      id: string,
+      sender: string,
+      content: string | null,
+      folderName: string,
+      period: number,
+    },
+  } >,
+};
+
 export interface GetRuleByIDQueryVariables {
   id: string,
 };
