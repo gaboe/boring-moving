@@ -112,13 +112,14 @@ export interface ImapConfigQuery {
   } | null,
 };
 
-export interface GetMostActiveRuleQueryVariables {
-  id: number,
+export interface MostActiveRulesQueryVariables {
+  count: number,
 };
 
-export interface GetMostActiveRuleQuery {
+export interface MostActiveRulesQuery {
   mostActiveRules:  Array< {
     __typename: "MetaStatType",
+    count: number,
     rule:  {
       __typename: "RuleType",
       id: string,

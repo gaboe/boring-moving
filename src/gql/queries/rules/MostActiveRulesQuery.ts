@@ -1,8 +1,14 @@
 import gql from "graphql-tag";
+import { Query } from "react-apollo";
+import {
+  MostActiveRulesQuery,
+  MostActiveRulesQueryVariables
+} from "../../../generated/types";
 
 const MOST_ACTIVE_RULES_QUERY = gql`
-  query GetMostActiveRule($id: Int!) {
-    mostActiveRules(count: $id) {
+  query MostActiveRules($count: Int!) {
+    mostActiveRules(count: $count) {
+      count
       rule {
         id
         sender
@@ -14,4 +20,9 @@ const MOST_ACTIVE_RULES_QUERY = gql`
   }
 `;
 
-export { MOST_ACTIVE_RULES_QUERY };
+class MostActiveQueryComponent extends Query<
+  MostActiveRulesQuery,
+  MostActiveRulesQueryVariables
+> {}
+
+export { MOST_ACTIVE_RULES_QUERY, MostActiveQueryComponent };

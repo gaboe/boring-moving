@@ -1,50 +1,48 @@
 import * as React from "react";
-import { Query } from "react-apollo";
-import { USER_QUERY as query, Props } from "./../../gql/queries/UserQuery";
 import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import {
+  MostActiveQueryComponent,
+  MOST_ACTIVE_RULES_QUERY
+} from "../../gql/queries/rules/MostActiveRulesQuery";
+import {
+  MostActiveRulesQueryVariables,
+  MostActiveRulesQuery
+} from "../../generated/types";
+import { Header } from "semantic-ui-react";
 
-const getName = (result: Props): string => {
-  if (result.data && result.data.user) {
-    return result.data.user.firstName;
-  }
-  return "Anonymous user";
+const getData = (data: MostActiveRulesQuery) => {
+  return data.mostActiveRules.map(x => {
+    return { rule: x.rule.id, count: x.count };
+  });
 };
 
-const Home: React.SFC<Props> = props => {
-  const data = [
-    {
-      value: 3400,
-      name: "Page A"
-    },
-    {
-      value: 2400,
-      name: "Page B"
-    },
-    {
-      value: 5400,
-      name: "Page C"
-    },
-    {
-      value: 8400,
-      name: "Page D"
-    }
-  ];
+const Home: React.SFC<{}> = props => {
+  const variables: MostActiveRulesQueryVariables = { count: 5 };
   return (
-    <Query query={query}>
-      {(result: Props) => {
-        return (
-          <>
-            <div>Hello {getName(result)}!</div>
-            <LineChart width={800} height={400} data={data}>
-              <Line type="monotone" dataKey="value" stroke="#8884d8" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-            </LineChart>
-          </>
-        );
+    <MostActiveQueryComponent
+      query={MOST_ACTIVE_RULES_QUERY}
+      variables={variables}
+    >
+      {result => {
+        if (result.data) {
+          return (
+            <>
+              <LineChart
+                width={800}
+                height={400}
+                data={getData(result.data && result.data)}
+              >
+                <Line type="monotone" dataKey="count" stroke="#8884d8" />
+                <XAxis dataKey="rule" />
+                <YAxis />
+                <Tooltip />
+              </LineChart>
+            </>
+          );
+        }
+        return <Header as="h3" content="There are no data for " />;
       }}
-    </Query>
+    </MostActiveQueryComponent>
   );
 };
 export { Home };
