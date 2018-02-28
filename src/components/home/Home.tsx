@@ -1,20 +1,11 @@
 import * as React from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   MostActiveQueryComponent,
   MOST_ACTIVE_RULES_QUERY
 } from "../../gql/queries/rules/MostActiveRulesQuery";
-import {
-  MostActiveRulesQueryVariables,
-  MostActiveRulesQuery
-} from "../../generated/types";
+import { MostActiveRulesQueryVariables } from "../../generated/types";
 import { Header } from "semantic-ui-react";
-
-const getData = (data: MostActiveRulesQuery) => {
-  return data.mostActiveRules.map(x => {
-    return { rule: x.rule.id, count: x.count };
-  });
-};
 
 const Home: React.SFC<{}> = props => {
   const variables: MostActiveRulesQueryVariables = { count: 5 };
@@ -24,23 +15,39 @@ const Home: React.SFC<{}> = props => {
       variables={variables}
     >
       {result => {
+        if (result.loading) {
+          return null;
+        }
         if (result.data) {
           return (
             <>
-              <LineChart
-                width={800}
-                height={400}
-                data={getData(result.data && result.data)}
+              <Header
+                as="h3"
+                content={`Boring moving moved ${
+                  result.data.mostActiveRules.count
+                } emails`}
+              />
+              <BarChart
+                width={900}
+                height={600}
+                data={result.data.mostActiveRules.rules.map(x => {
+                  return { rule: `${x.rule.folderName}`, count: x.count };
+                })}
               >
-                <Line type="monotone" dataKey="count" stroke="#8884d8" />
                 <XAxis dataKey="rule" />
                 <YAxis />
-                <Tooltip />
-              </LineChart>
+                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                <Bar dataKey="count" fill="#016936" barSize={30} />
+              </BarChart>
             </>
           );
         }
-        return <Header as="h3" content="There are no data for " />;
+        return (
+          <Header
+            as="h3"
+            content="There are no data about moved emails. Have you configured imap and created rule?"
+          />
+        );
       }}
     </MostActiveQueryComponent>
   );

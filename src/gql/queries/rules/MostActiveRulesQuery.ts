@@ -8,13 +8,15 @@ import {
 const MOST_ACTIVE_RULES_QUERY = gql`
   query MostActiveRules($count: Int!) {
     mostActiveRules(count: $count) {
+      userID
       count
-      rule {
-        id
-        sender
-        content
-        folderName
-        period
+      rules {
+        ruleID
+        count
+        rule {
+          id
+          folderName
+        }
       }
     }
   }

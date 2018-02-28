@@ -117,18 +117,22 @@ export interface MostActiveRulesQueryVariables {
 };
 
 export interface MostActiveRulesQuery {
-  mostActiveRules:  Array< {
+  mostActiveRules:  {
     __typename: "MetaStatType",
+    userID: string,
+    // Count of all emails moved by all rules
     count: number,
-    rule:  {
-      __typename: "RuleType",
-      id: string,
-      sender: string,
-      content: string | null,
-      folderName: string,
-      period: number,
-    },
-  } >,
+    rules:  Array< {
+      __typename: "RuleStatType",
+      ruleID: string,
+      count: number,
+      rule:  {
+        __typename: "RuleType",
+        id: string,
+        folderName: string,
+      },
+    } >,
+  },
 };
 
 export interface GetRuleByIDQueryVariables {
