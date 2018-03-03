@@ -22,7 +22,7 @@ class AppEmailCount extends React.Component<{}> {
                                                     <Icon name='mail' />
                                                     {response.data.appStat.emailCount}
                                                 </Statistic.Value>
-                                                <Statistic.Label>Emails moved by Boring Moving!</Statistic.Label>
+                                                <Statistic.Label>Emails moved by Boring Moving</Statistic.Label>
                                             </Statistic>
                                         </Col>
                                     </Row>
@@ -30,9 +30,7 @@ class AppEmailCount extends React.Component<{}> {
                             )
                         }
                     }
-
                 </AppStatQueryComponent >
-
             </>
         );
     }
