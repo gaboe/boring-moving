@@ -1,7 +1,7 @@
 import * as React from "react";
 import { InputOnChangeData, Header, } from "semantic-ui-react";
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
-import { USER_QUERY as query } from "./../../gql/queries/UserQuery";
+import { USER_QUERY } from "./../../gql/queries/UserQuery";
 import { RouteComponentProps } from "react-router";
 import { GoogleLogin, GoogleLoginResponse } from "react-google-login";
 import { CSSProperties } from "react";
@@ -42,7 +42,7 @@ class Login extends React.Component<PropsWithRouter, State> {
           update: (proxy, data) => {
             if (data.data) {
               const user = { user: (data.data as AuthentificateMutation).authentificate };
-              proxy.writeQuery({ query, data: user });
+              proxy.writeQuery({ query: USER_QUERY, data: user });
             }
             this.props.history.push("/");
           }
