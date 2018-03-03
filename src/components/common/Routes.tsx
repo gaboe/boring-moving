@@ -11,7 +11,7 @@ import { EditRule } from "../rules/EditRule";
 const Routes = () => {
   return (
     <div>
-      <Route exact={true} path="/" component={Home} />
+      <Route exact={true} path="/" component={RequireAuth(Home)} />
       <Route path="/rules" component={RequireAuth(Rules)} />
       <Route path="/add-rule" component={RequireAuth(AddRule)} />
       <Route path="/edit-rule/:id" component={RequireAuth(EditRule)} />

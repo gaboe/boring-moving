@@ -4969,6 +4969,13 @@ react-google-login@^3.0.4:
     "@types/react" "*"
     prop-types "^15.6.0"
 
+react-grid-system@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-3.1.2.tgz#23c5e58b07e8ee0f7f42ef8c03c7b78c240a3458"
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.6.0"
+
 react-resize-detector@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-resize-detector/-/react-resize-detector-1.1.0.tgz#4a9831fa3caad32230478dd0185cbd2aa91a5ebf"

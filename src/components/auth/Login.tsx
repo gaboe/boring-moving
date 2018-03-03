@@ -1,14 +1,12 @@
 import * as React from "react";
-import { InputOnChangeData, Grid, Header } from "semantic-ui-react";
-
+import { InputOnChangeData, Header } from "semantic-ui-react";
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
 import { USER_QUERY } from "./../../gql/queries/UserQuery";
 import { RouteComponentProps } from "react-router";
-import GridColumn from "semantic-ui-react/dist/commonjs/collections/Grid/GridColumn";
 import { GoogleLogin, GoogleLoginResponse } from "react-google-login";
 import { CSSProperties } from "react";
 import { NonAuthenificatedUser } from "../../models/User";
-
+import { Col, Row, Visible } from 'react-grid-system';
 const mushing = require("./../../mushing.jpg");
 
 const GoogleButtonStyle: CSSProperties = {};
@@ -64,10 +62,9 @@ class Login extends React.Component<PropsWithRouter, State> {
 
   render() {
     return (
-      <Grid centered={true}>
-        <Grid.Row centered={true} columns={3}>
-          <GridColumn />
-          <GridColumn>
+      <>
+        <Row >
+          <Col offset={{ xs: 1, sm: 1, md: 2, lg: 3 }} xs={10} lg={6}>
             <Header as="h1" content="Welcome to Boring Moving!" />
             <Header as="h2" content="App that automates boring email moving" />
             <Header as="h3">
@@ -82,11 +79,16 @@ class Login extends React.Component<PropsWithRouter, State> {
               onFailure={this.googleResponse}
               style={GoogleButtonStyle}
             />
-          </GridColumn>
-          <GridColumn />
-        </Grid.Row>
-        <img src={mushing} />
-      </Grid>
+          </Col>
+        </Row >
+        <Row >
+          <Col offset={{ xl: 2, lg: 1 }}>
+            <Visible xl={true} lg={true}>
+              <img src={mushing} />
+            </Visible>
+          </Col>
+        </Row>
+      </>
     );
   }
 }
