@@ -1,14 +1,13 @@
 import * as React from "react";
-import { InputOnChangeData, Header } from "semantic-ui-react";
+import { InputOnChangeData, Header, Statistic, Icon } from "semantic-ui-react";
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
 import { USER_QUERY } from "./../../gql/queries/UserQuery";
 import { RouteComponentProps } from "react-router";
 import { GoogleLogin, GoogleLoginResponse } from "react-google-login";
 import { CSSProperties } from "react";
 import { NonAuthenificatedUser } from "../../models/User";
-import { Col, Row, Visible } from 'react-grid-system';
+import { Col, Row, } from 'react-grid-system';
 import { AppStatQueryComponent, APP_STAT_QUERY } from "../../gql/queries/stats/AppStatQuery";
-const mushing = require("./../../mushing.jpg");
 
 const GoogleButtonStyle: CSSProperties = {};
 type State = {
@@ -73,11 +72,6 @@ class Login extends React.Component<PropsWithRouter, State> {
                     <Col offset={{ xs: 1, sm: 1, md: 2, lg: 3 }} xs={10} lg={6}>
                       <Header as="h1" content="Welcome to Boring Moving!" />
                       <Header as="h2" content="App that automates boring email moving" />
-                      <Header as="h4">
-                        Boring moving already already moved
-                        {response.data != null ? ` ${response.data.appStat.emailCount} ` : " many "}
-                        emails, and we are still moving
-                        </Header>
 
                       <Header as="h3">
                         In order to connect to google API, you need to login with your
@@ -95,10 +89,14 @@ class Login extends React.Component<PropsWithRouter, State> {
                     </Col>
                   </Row >
                   <Row >
-                    <Col offset={{ xl: 2, lg: 1 }}>
-                      <Visible xl={true} lg={true}>
-                        <img src={mushing} />
-                      </Visible>
+                    <Col offset={{ xs: 5, lg: 5 }}>
+                      <Statistic size="huge">
+                        <Statistic.Value>
+                          <Icon name='mail' />
+                          {response.data != null ? ` ${response.data.appStat.emailCount} ` : " many "}
+                        </Statistic.Value>
+                        <Statistic.Label>Emails moved by Boring Moving!</Statistic.Label>
+                      </Statistic>
                     </Col>
                   </Row>
                 </>
