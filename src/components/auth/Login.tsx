@@ -1,13 +1,14 @@
 import * as React from "react";
 import { InputOnChangeData, Header, } from "semantic-ui-react";
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
-import { USER_QUERY } from "./../../gql/queries/UserQuery";
+import { USER_QUERY as query } from "./../../gql/queries/UserQuery";
 import { RouteComponentProps } from "react-router";
 import { GoogleLogin, GoogleLoginResponse } from "react-google-login";
 import { CSSProperties } from "react";
 import { NonAuthenificatedUser } from "../../models/User";
 import { Col, Row, } from 'react-grid-system';
 import { AppEmailCount } from "./AppEmailCount";
+import { AuthentificateMutation, AuthentificateMutationVariables } from "../../generated/types";
 
 const GoogleButtonStyle: CSSProperties = {};
 type State = {
@@ -34,16 +35,19 @@ class Login extends React.Component<PropsWithRouter, State> {
     email
   }: NonAuthenificatedUser): void => {
     if (this.props.mutate) {
+      const variables: AuthentificateMutationVariables = { googleID, firstName, lastName, email }
       this.props
         .mutate({
-          variables: { googleID, firstName, lastName, email },
-          refetchQueries: [{ query: USER_QUERY }]
-        })
-        .then(({ data }) => {
-          this.props.history.push("/");
+          variables: variables,
+          update: (proxy, data) => {
+            if (data.data) {
+              const user = { user: (data.data as AuthentificateMutation).authentificate };
+              proxy.writeQuery({ query, data: user });
+            }
+            this.props.history.push("/");
+          }
         })
         .catch(error => {
-          console.log("eeer", error);
           this.setState({ formError: true });
         });
     }
