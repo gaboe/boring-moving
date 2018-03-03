@@ -167,3 +167,11 @@ export interface RulesOnUserQuery {
     } > | null,
   } | null,
 };
+
+export interface AppStatQuery {
+  appStat:  {
+    __typename: "AppStatType",
+    // Count of all emails moved by all application
+    emailCount: number,
+  },
+};

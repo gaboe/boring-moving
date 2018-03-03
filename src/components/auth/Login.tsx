@@ -7,6 +7,7 @@ import { GoogleLogin, GoogleLoginResponse } from "react-google-login";
 import { CSSProperties } from "react";
 import { NonAuthenificatedUser } from "../../models/User";
 import { Col, Row, Visible } from 'react-grid-system';
+import { AppStatQueryComponent, APP_STAT_QUERY } from "../../gql/queries/stats/AppStatQuery";
 const mushing = require("./../../mushing.jpg");
 
 const GoogleButtonStyle: CSSProperties = {};
@@ -63,31 +64,50 @@ class Login extends React.Component<PropsWithRouter, State> {
   render() {
     return (
       <>
-        <Row >
-          <Col offset={{ xs: 1, sm: 1, md: 2, lg: 3 }} xs={10} lg={6}>
-            <Header as="h1" content="Welcome to Boring Moving!" />
-            <Header as="h2" content="App that automates boring email moving" />
-            <Header as="h3">
-              In order to connect to google API, you need to login with your
-              Google account
-            </Header>
-            <GoogleLogin
-              className="ui linkedin button"
-              clientId="578678813391-3khelub231ejgukuui1r4dqkg67o8p39.apps.googleusercontent.com"
-              buttonText="Login with Google"
-              onSuccess={this.googleResponse}
-              onFailure={this.googleResponse}
-              style={GoogleButtonStyle}
-            />
-          </Col>
-        </Row >
-        <Row >
-          <Col offset={{ xl: 2, lg: 1 }}>
-            <Visible xl={true} lg={true}>
-              <img src={mushing} />
-            </Visible>
-          </Col>
-        </Row>
+        <AppStatQueryComponent query={APP_STAT_QUERY} >
+          {
+            response => {
+              return (
+                <>
+                  <Row >
+                    <Col offset={{ xs: 1, sm: 1, md: 2, lg: 3 }} xs={10} lg={6}>
+                      <Header as="h1" content="Welcome to Boring Moving!" />
+                      <Header as="h2" content="App that automates boring email moving" />
+                      <Header as="h4">
+                        Boring moving already already moved
+                        {response.data != null ? ` ${response.data.appStat.emailCount} ` : " many "}
+                        emails, and we are still moving
+                        </Header>
+
+                      <Header as="h3">
+                        In order to connect to google API, you need to login with your
+                        Google account
+                      </Header>
+
+                      <GoogleLogin
+                        className="ui linkedin button"
+                        clientId="578678813391-3khelub231ejgukuui1r4dqkg67o8p39.apps.googleusercontent.com"
+                        buttonText="Login with Google"
+                        onSuccess={this.googleResponse}
+                        onFailure={this.googleResponse}
+                        style={GoogleButtonStyle}
+                      />
+                    </Col>
+                  </Row >
+                  <Row >
+                    <Col offset={{ xl: 2, lg: 1 }}>
+                      <Visible xl={true} lg={true}>
+                        <img src={mushing} />
+                      </Visible>
+                    </Col>
+                  </Row>
+                </>
+              )
+            }
+          }
+
+        </AppStatQueryComponent >
+
       </>
     );
   }
