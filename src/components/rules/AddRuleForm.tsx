@@ -66,8 +66,6 @@ class AddRuleForm extends React.Component<Props, State> {
   };
 
   componentWillReceiveProps(props: Props) {
-    console.log("received", props);
-
     if (props.rule) {
       const rule = props.rule;
       this.setState({
