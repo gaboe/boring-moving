@@ -11,6 +11,7 @@ import {
 } from "../../gql/mutations/imapConfig/SaveImapConfigMutation";
 import { ToastContainer, toast } from "react-toastify";
 import { SaveImapConfigMutation, ImapConfigQuery } from "../../generated/types";
+import { Row, Col } from "react-grid-system";
 
 type State = {} & FormState;
 type Props = MutationProps;
@@ -47,16 +48,20 @@ class ImapConfig extends React.Component<Props, State> {
   render() {
     return (
       <>
-        <ImapConfigQueryComponent query={IMAPCONFIG_QUERY}>
-          {response => {
-            return (
-              <>
-                <Header as="h1" content="Imap config" />
-                {this.renderForm(response.data)}
-              </>
-            );
-          }}
-        </ImapConfigQueryComponent>
+        <Row>
+          <Col offset={{ sm: 1 }} sm={10}>
+            <ImapConfigQueryComponent query={IMAPCONFIG_QUERY}>
+              {response => {
+                return (
+                  <>
+                    <Header as="h1" content="Imap config" />
+                    {this.renderForm(response.data)}
+                  </>
+                );
+              }}
+            </ImapConfigQueryComponent>
+          </Col>
+        </Row>
         <ToastContainer autoClose={2000} />
       </>
     );
