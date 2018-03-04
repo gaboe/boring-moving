@@ -102,9 +102,9 @@ class ImapConfigForm extends React.Component<ComponentProps, State> {
             header="Ups"
             content={`Everything must be filled`}
           />
-          <Button color="linkedin" type="submit">
+          <Button positive={true} type="submit" >
             Save
-          </Button>
+           </Button>
         </Form>
       </>
     );
