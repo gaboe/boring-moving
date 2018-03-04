@@ -130,6 +130,7 @@ export interface MostActiveRulesQuery {
         __typename: "RuleType",
         id: string,
         folderName: string,
+        subject: string | null,
       },
     } >,
   },

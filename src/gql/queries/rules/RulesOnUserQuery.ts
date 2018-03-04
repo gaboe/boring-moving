@@ -21,6 +21,6 @@ const RULES_ON_USER_QUERY = gql`
 
 type RulesType = NonNullable<NonNullable<RulesOnUserQuery["user"]>["rules"]>;
 
-class RulesOnQueryComponent extends Query<RulesOnUserQuery, {}> {}
+class RulesOnQueryComponent extends Query<RulesOnUserQuery, {}> { }
 
 export { RULES_ON_USER_QUERY, RulesType, RulesOnQueryComponent };

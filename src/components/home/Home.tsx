@@ -73,9 +73,9 @@ class Home extends React.Component<{}, State> {
                   <Col offset={{ sm: 1, lg: 2, xl: 3 }} sm={10} lg={8} xl={6}>
                     <BarChart
                       width={this.getWidth()}
-                      height={this.state.windowHeight < 500 ? this.state.windowHeight - 100 : 500}
+                      height={this.state.windowHeight < 600 ? this.state.windowHeight - 100 : 600}
                       data={result.data.mostActiveRules.rules.map(x => {
-                        return { rule: `${x.rule.folderName}`, count: x.count };
+                        return { rule: `${x.rule.subject}`, count: x.count };
                       })}
                     >
                       <XAxis dataKey="rule" />

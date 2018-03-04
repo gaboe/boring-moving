@@ -16,6 +16,7 @@ const MOST_ACTIVE_RULES_QUERY = gql`
         rule {
           id
           folderName
+          subject
         }
       }
     }
@@ -25,6 +26,6 @@ const MOST_ACTIVE_RULES_QUERY = gql`
 class MostActiveQueryComponent extends Query<
   MostActiveRulesQuery,
   MostActiveRulesQueryVariables
-> {}
+  > { }
 
 export { MOST_ACTIVE_RULES_QUERY, MostActiveQueryComponent };
