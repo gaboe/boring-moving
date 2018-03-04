@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Header } from "semantic-ui-react";
-
+import { Row, Col } from 'react-grid-system';
 import {
   RULES_ON_USER_QUERY as query,
   RulesOnQueryComponent,
@@ -41,20 +41,26 @@ const Rules: React.SFC<Props> = props => {
     }
   };
   return (
-    <RulesOnQueryComponent query={query}>
-      {response => {
-        return (
-          <>
-            <Header as="h1" icon="options" content="Rules" />
-            <Header
-              as="h5"
-              content="You can see yours predifined rules, which will be executed periodicaly"
-            />
-            <Table rules={getRules(response)} onDelete={deleteRule} />
-          </>
-        );
-      }}
-    </RulesOnQueryComponent>
+    <>
+      <Row>
+        <Col offset={{ md: 1 }} md={10}>
+          <RulesOnQueryComponent query={query}>
+            {response => {
+              return (
+                <>
+                  <Header as="h1" icon="options" content="Rules" />
+                  <Header
+                    as="h5"
+                    content="You can see yours predifined rules, which will be executed periodicaly"
+                  />
+                  <Table rules={getRules(response)} onDelete={deleteRule} />
+                </>
+              );
+            }}
+          </RulesOnQueryComponent>
+        </Col>
+      </Row>
+    </>
   );
 };
 const withDelete = withDeleteRuleMutation(Rules);
