@@ -11,6 +11,7 @@ import { RouterProps } from "react-router";
 import { AddRuleMutationVariables } from "../../generated/types";
 import styled from "styled-components";
 import { RuleType } from "../../gql/queries/rules/RuleQuery";
+import { Row, Col } from "react-grid-system";
 
 type State = {
   errors: string[];
@@ -55,10 +56,14 @@ class AddRule extends React.Component<PropsWithRouter, State> {
   render() {
     return (
       <>
-        <HeaderStyle>
-          <Header as="h1" content="Create new rule" />
-        </HeaderStyle>
-        <AddRuleForm onSubmit={this.addMutation} />
+        <Row>
+          <Col offset={{ lg: 1 }} lg={10}>
+            <HeaderStyle>
+              <Header as="h1" content="Create new rule" />
+            </HeaderStyle>
+            <AddRuleForm onSubmit={this.addMutation} />
+          </Col>
+        </Row>
       </>
     );
   }

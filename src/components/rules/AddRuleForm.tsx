@@ -12,6 +12,10 @@ const ButtonStyle = styled.span`
   padding-right: 0.5em;
 `;
 
+const FormFieldStyle = styled.div`
+  padding-bottom: 1em;
+`;
+
 type Props = {
   onSubmit: (rule: RuleType) => void;
   errorMessage?: string;
@@ -79,91 +83,108 @@ class AddRuleForm extends React.Component<Props, State> {
       <>
         <Form>
           <Form.Group inline={true}>
-            <Form.Field
-              error={contains(
-                nameof<AddRuleMutationVariables>("sender"),
-                this.state.errors
-              )}
-            >
-              <label>I am bored moving emails from</label>
-              <Input
-                label={{ icon: "asterisk" }}
-                labelPosition="left corner"
-                placeholder="email@something.com"
-                name={nameof<AddRuleMutationVariables>("sender")}
-                onChange={this.handleChange}
+
+            <FormFieldStyle>
+              <Form.Field
                 error={contains(
                   nameof<AddRuleMutationVariables>("sender"),
                   this.state.errors
                 )}
-                value={this.state.rule && this.state.rule.sender}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>with subject</label>
-              <Input
-                placeholder="Hi this is us, again"
-                name={nameof<AddRuleMutationVariables>("subject")}
-                onChange={this.handleChange}
-                value={this.state.rule && this.state.rule.subject}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>and these emails usually have content like </label>
-              <Input
-                placeholder="everything is ol'right"
-                name={nameof<AddRuleMutationVariables>("content")}
-                onChange={this.handleChange}
-                value={this.state.rule && this.state.rule.content}
-              />
-            </Form.Field>
+              >
+                <label>I am bored moving emails from</label>
+                <Input
+                  label={{ icon: "asterisk" }}
+                  labelPosition="left corner"
+                  placeholder="email@something.com"
+                  name={nameof<AddRuleMutationVariables>("sender")}
+                  onChange={this.handleChange}
+                  error={contains(
+                    nameof<AddRuleMutationVariables>("sender"),
+                    this.state.errors
+                  )}
+                  value={this.state.rule && this.state.rule.sender}
+                />
+              </Form.Field>
+            </FormFieldStyle>
+
+            <FormFieldStyle>
+              <Form.Field>
+                <label>with subject</label>
+                <Input
+                  placeholder="Hi this is us, again"
+                  name={nameof<AddRuleMutationVariables>("subject")}
+                  onChange={this.handleChange}
+                  value={this.state.rule && this.state.rule.subject}
+                />
+              </Form.Field>
+            </FormFieldStyle>
+
+            <FormFieldStyle>
+              <Form.Field>
+                <label>and these emails usually have content like </label>
+                <Input
+                  placeholder="everything is ol'right"
+                  name={nameof<AddRuleMutationVariables>("content")}
+                  onChange={this.handleChange}
+                  value={this.state.rule && this.state.rule.content}
+                />
+              </Form.Field>
+            </FormFieldStyle>
+
           </Form.Group>
         </Form>
 
         <Form>
           <Form.Group inline={true}>
-            <Form.Field
-              error={contains(
-                nameof<AddRuleMutationVariables>("folderName"),
-                this.state.errors
-              )}
-            >
-              <label>
-                And it would be nice to move this emails to folder named
-              </label>
-              <Input
-                label={{ icon: "asterisk" }}
-                labelPosition="left corner"
-                placeholder="cool folder name"
-                name={nameof<AddRuleMutationVariables>("folderName")}
-                onChange={this.handleChange}
+
+            <FormFieldStyle>
+              <Form.Field
                 error={contains(
                   nameof<AddRuleMutationVariables>("folderName"),
                   this.state.errors
                 )}
-                value={this.state.rule && this.state.rule.folderName}
-              />
-            </Form.Field>
-            <Form.Field
-              error={contains(
-                nameof<AddRuleMutationVariables>("period"),
-                this.state.errors
-              )}
-            >
-              <label>after</label>
-              <Input
-                label={{ icon: "asterisk" }}
-                labelPosition="left corner"
-                placeholder="5"
-                name={nameof<AddRuleMutationVariables>("period")}
-                onChange={this.handleChange}
+              >
+                <label>
+                  And it would be nice to move this emails to folder named
+              </label>
+                <Input
+                  label={{ icon: "asterisk" }}
+                  labelPosition="left corner"
+                  placeholder="cool folder name"
+                  name={nameof<AddRuleMutationVariables>("folderName")}
+                  onChange={this.handleChange}
+                  error={contains(
+                    nameof<AddRuleMutationVariables>("folderName"),
+                    this.state.errors
+                  )}
+                  value={this.state.rule && this.state.rule.folderName}
+                />
+              </Form.Field>
+            </FormFieldStyle>
+
+            <FormFieldStyle>
+              <Form.Field
                 error={contains(
                   nameof<AddRuleMutationVariables>("period"),
                   this.state.errors
                 )}
-                value={this.state.rule && this.state.rule.period}
-              />
-            </Form.Field>
+              >
+                <label>after</label>
+                <Input
+                  label={{ icon: "asterisk" }}
+                  labelPosition="left corner"
+                  placeholder="5"
+                  name={nameof<AddRuleMutationVariables>("period")}
+                  onChange={this.handleChange}
+                  error={contains(
+                    nameof<AddRuleMutationVariables>("period"),
+                    this.state.errors
+                  )}
+                  value={this.state.rule && this.state.rule.period}
+                />
+              </Form.Field>
+            </FormFieldStyle>
+
             <Form.Field>
               <label>minutes after receiving them.</label>
             </Form.Field>
