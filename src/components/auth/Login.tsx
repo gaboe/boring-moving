@@ -65,6 +65,8 @@ class Login extends React.Component<PropsWithRouter, State> {
   };
 
   render() {
+    console.log(process.env.REACT_APP_SERVER_URL);
+    console.log(process.env.REACT_APP_GOOGLE_API_CLIENT_ID);
     return (
       <>
         <Row >
@@ -76,14 +78,15 @@ class Login extends React.Component<PropsWithRouter, State> {
               In order to connect to google API, you need to login with your
               Google account
             </Header>
-            <GoogleLogin
-              className="ui linkedin button"
-              clientId="578678813391-3khelub231ejgukuui1r4dqkg67o8p39.apps.googleusercontent.com"
-              buttonText="Login with Google"
-              onSuccess={this.googleResponse}
-              onFailure={this.googleResponse}
-              style={GoogleButtonStyle}
-            />
+            {process.env.REACT_APP_GOOGLE_API_CLIENT_ID &&
+              <GoogleLogin
+                className="ui linkedin button"
+                clientId={process.env.REACT_APP_GOOGLE_API_CLIENT_ID}
+                buttonText="Login with Google"
+                onSuccess={this.googleResponse}
+                onFailure={this.googleResponse}
+                style={GoogleButtonStyle}
+              />}
           </Col>
         </Row >
         <AppEmailCount />
