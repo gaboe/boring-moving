@@ -49,7 +49,7 @@ class ImapConfig extends React.Component<Props, State> {
     return (
       <>
         <Row>
-          <Col offset={{ sm: 1 }} sm={10}>
+          <Col offset={{ sm: 1, md: 2 }} sm={10} md={8}>
             <ImapConfigQueryComponent query={IMAPCONFIG_QUERY}>
               {response => {
                 return (

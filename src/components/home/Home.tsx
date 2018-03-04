@@ -60,7 +60,7 @@ class Home extends React.Component<{}, State> {
             return (
               <>
                 <Row>
-                  <Col offset={{ sm: 5 }} sm={2}>
+                  <Col offset={{ xs: 2, sm: 4, }} xs={8} sm={4}>
                     <Header
                       as="h3"
                       content={`Boring moving moved ${
@@ -71,10 +71,9 @@ class Home extends React.Component<{}, State> {
                 </Row>
                 <Row>
                   <Col offset={{ sm: 1, lg: 2, xl: 3 }} sm={10} lg={8} xl={6}>
-
                     <BarChart
                       width={this.getWidth()}
-                      height={this.state.windowHeight - 100}
+                      height={this.state.windowHeight < 500 ? this.state.windowHeight - 100 : 500}
                       data={result.data.mostActiveRules.rules.map(x => {
                         return { rule: `${x.rule.folderName}`, count: x.count };
                       })}

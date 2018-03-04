@@ -13,7 +13,7 @@ class ImapConfigModal extends React.Component {
             <Modal
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
-                trigger={<Icon onClick={this.handleOpen} name="question circle" size="large" />}
+                trigger={<Icon onClick={this.handleOpen} link={true} name="question circle" size="large" />}
                 basic={true}
                 size='small'
             >
