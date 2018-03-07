@@ -8,6 +8,7 @@ import {
 import { AddRuleForm } from "./AddRuleForm";
 import { withUpdateRuleMutation, Props as MutationProps } from "../../gql/mutations/rules/UpdateRule";
 import { UpdateRuleMutationVariables, GetRuleByIDQuery } from "../../generated/types";
+import { ToastContainer, toast } from "react-toastify";
 
 type Props = RouteComponentProps<{ id: string }> & MutationProps;
 type State = { errors: string[]; rule?: RuleType };
@@ -36,7 +37,8 @@ class EditRule extends React.Component<Props, State> {
             proxy.writeQuery({ query: RULE_QUERY, data: r });
           }
         }
-      })
+      }).then(_ => toast.success("Rule was saved", { position: toast.POSITION.TOP_RIGHT })
+      )
     }
     console.log(rule);
   };
@@ -44,22 +46,25 @@ class EditRule extends React.Component<Props, State> {
   render() {
     const id = this.props.match.params.id;
     return (
-      <RuleQuery query={RULE_QUERY} variables={{ id }}>
-        {response => {
-          if (response.data) {
-            return (
-              <>
-                <h1>EditRule</h1>
-                <AddRuleForm
-                  onSubmit={this.onSubmit}
-                  rule={response.data.rule}
-                />
-              </>
-            );
-          }
-          return null;
-        }}
-      </RuleQuery>
+      <>
+        <RuleQuery query={RULE_QUERY} variables={{ id }}>
+          {response => {
+            if (response.data) {
+              return (
+                <>
+                  <h1>EditRule</h1>
+                  <AddRuleForm
+                    onSubmit={this.onSubmit}
+                    rule={response.data.rule}
+                  />
+                </>
+              );
+            }
+            return null;
+          }}
+        </RuleQuery>
+        <ToastContainer autoClose={2000} />
+      </>
     );
   }
 }
