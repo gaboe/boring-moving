@@ -6,8 +6,10 @@ import {
   RuleType
 } from "../../gql/queries/rules/RuleQuery";
 import { AddRuleForm } from "./AddRuleForm";
+import { withUpdateRuleMutation, Props as MutationProps } from "../../gql/mutations/rules/UpdateRule";
+import { UpdateRuleMutationVariables, GetRuleByIDQuery } from "../../generated/types";
 
-type Props = RouteComponentProps<{ id: string }>;
+type Props = RouteComponentProps<{ id: string }> & MutationProps;
 type State = { errors: string[]; rule?: RuleType };
 
 class EditRule extends React.Component<Props, State> {
@@ -16,7 +18,26 @@ class EditRule extends React.Component<Props, State> {
     this.state = { errors: [] };
   }
 
-  onSubmit = (rule: RuleType) => {
+  onSubmit = (rule: NonNullable<RuleType>) => {
+    if (this.props.mutate) {
+      const variables: UpdateRuleMutationVariables = {
+        content: rule.content,
+        folderName: rule.folderName,
+        sender: rule.sender,
+        period: rule.period,
+        subject: rule.subject,
+        id: rule.id
+      }
+      this.props.mutate({
+        variables: variables,
+        update: (proxy, data) => {
+          if (data.data) {
+            const r = { rule: (data.data as GetRuleByIDQuery).rule };
+            proxy.writeQuery({ query: RULE_QUERY, data: r });
+          }
+        }
+      })
+    }
     console.log(rule);
   };
 
@@ -42,5 +63,5 @@ class EditRule extends React.Component<Props, State> {
     );
   }
 }
-
-export { EditRule };
+const hoc = withUpdateRuleMutation(EditRule)
+export { hoc as EditRule };
