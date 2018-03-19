@@ -1,7 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Icon, Header } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 import { Row, Col } from "react-grid-system";
+import { HasCompleteConfigDisclaimer } from "./HasCompleteImapConfigDisclaimer";
 
 const Section = styled.section`
   padding-left: 1.5em;
@@ -28,12 +29,7 @@ const UpperBar: React.SFC<Props> = props => {
             loading={props.isMenuVisible}
           />
         </Col>
-        <Col offset={{ lg: 3, sm: 1 }} lg={6} sm={9}>
-          <Header as="h4">
-            It looks like your ImapConfig is not fully configured, yet.
-            You can configure it here
-            </Header>
-        </Col>
+        <HasCompleteConfigDisclaimer />
       </Row>
     </Section>
   );

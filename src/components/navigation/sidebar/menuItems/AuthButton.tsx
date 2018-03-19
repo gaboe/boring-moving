@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { Props as LogoutProps } from "./../../../../gql/mutations/users/Logout";
 import { RULES_ON_USER_QUERY } from "../../../../gql/queries/rules/RulesOnUserQuery";
-import { USER_QUERY } from "./../../../../gql/queries/UserQuery";
+import { USER_QUERY } from "./../../../../gql/queries/users/UserQuery";
 
 type Props = {
   isAuthenticated: boolean;

@@ -13,7 +13,7 @@ import {
   Props
 } from "./../../gql/mutations/users/Register";
 import { nameof } from "./../../utils/Reflection";
-import { USER_QUERY } from "./../../gql/queries/UserQuery";
+import { USER_QUERY } from "./../../gql/queries/users/UserQuery";
 import { RouteComponentProps } from "react-router";
 import GridColumn from "semantic-ui-react/dist/commonjs/collections/Grid/GridColumn";
 

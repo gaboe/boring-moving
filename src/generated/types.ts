@@ -187,6 +187,13 @@ export interface AppStatQuery {
   },
 };
 
+export interface HasCompleteImapConfigQuery {
+  user:  {
+    __typename: "UserType",
+    hasCompleteImapConfig: boolean,
+  } | null,
+};
+
 export interface UserQuery {
   user:  {
     __typename: "UserType",

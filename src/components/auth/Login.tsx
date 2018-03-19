@@ -1,7 +1,7 @@
 import * as React from "react";
 import { InputOnChangeData, Header, } from "semantic-ui-react";
 import { withLoginMutation, Props } from "./../../gql/mutations/users/Login";
-import { USER_QUERY } from "./../../gql/queries/UserQuery";
+import { USER_QUERY } from "./../../gql/queries/users/UserQuery";
 import { RouteComponentProps } from "react-router";
 import { GoogleLogin, GoogleLoginResponse } from "react-google-login";
 import { CSSProperties } from "react";
