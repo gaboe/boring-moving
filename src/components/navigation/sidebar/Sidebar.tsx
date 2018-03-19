@@ -2,7 +2,7 @@ import * as React from "react";
 import { Sidebar, Segment } from "semantic-ui-react";
 import styled from "styled-components";
 
-import { MenuIcon } from "./../sidebar/MenuIcon";
+import { UpperBar } from "./../upperbar/UpperBar";
 import { Menu } from "./Menu";
 type Props = {
   children?: React.ReactNode;
@@ -26,7 +26,7 @@ class SidebarLeftScaleDown extends React.Component<Props, State> {
   render() {
     return (
       <div>
-        <MenuIcon
+        <UpperBar
           isMenuVisible={this.state.visible}
           setVisibilityTrue={this.setVisibilityTrue}
           setVisibilityFalse={this.setVisibilityFalse}

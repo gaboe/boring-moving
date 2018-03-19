@@ -1,4 +1,4 @@
-import { SidebarLeftScaleDown as Sidebar } from "./components/common/sidebar/Sidebar";
+import { SidebarLeftScaleDown as Sidebar } from "./components/navigation/sidebar/Sidebar";
 import * as React from "react";
 import { HashRouter as Router } from "react-router-dom";
 import { ApolloClient } from "apollo-client";
