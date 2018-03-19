@@ -3,7 +3,7 @@ import { Query } from "react-apollo";
 import {
   USER_QUERY as query,
   Props as QueryProps
-} from "./../../../../gql/queries/UserQuery";
+} from "./../../../../gql/queries/users/UserQuery";
 import {
   Props as MutationProps,
   withLogout

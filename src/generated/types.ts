@@ -111,17 +111,6 @@ export interface RegisterMutation {
   } | null,
 };
 
-export interface UserQuery {
-  user:  {
-    __typename: "UserType",
-    id: string,
-    email: string,
-    firstName: string,
-    lastName: string,
-    googleID: string,
-  } | null,
-};
-
 export interface ImapConfigQuery {
   imapConfig:  {
     __typename: "ImapConfigType",
@@ -196,4 +185,15 @@ export interface AppStatQuery {
     // Count of all emails moved by all application
     emailCount: number,
   },
+};
+
+export interface UserQuery {
+  user:  {
+    __typename: "UserType",
+    id: string,
+    email: string,
+    firstName: string,
+    lastName: string,
+    googleID: string,
+  } | null,
 };

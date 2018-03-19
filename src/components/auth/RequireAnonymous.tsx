@@ -1,5 +1,5 @@
 import * as React from "react";
-import { withUser, Props } from "../../gql/queries/UserQuery";
+import { withUser, Props } from "../../gql/queries/users/UserQuery";
 import { RouteComponentProps } from "react-router";
 
 type PropsWithRouter = RouteComponentProps<{}> & Props;

@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import { ChildProps, graphql } from "react-apollo";
-import { UserQuery } from "../../generated/types";
+import { UserQuery } from "./../../../generated/types";
 
 const USER_QUERY = gql`
   query User {
