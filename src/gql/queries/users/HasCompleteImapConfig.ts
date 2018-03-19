@@ -5,6 +5,7 @@ import { Query } from "react-apollo";
 const HAS_COMPLETE_IMAP_CONFIG_QUERY = gql`
   query HasCompleteImapConfig {
     user {
+        id
         hasCompleteImapConfig
       }
   }

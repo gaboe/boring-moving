@@ -190,6 +190,7 @@ export interface AppStatQuery {
 export interface HasCompleteImapConfigQuery {
   user:  {
     __typename: "UserType",
+    id: string,
     hasCompleteImapConfig: boolean,
   } | null,
 };

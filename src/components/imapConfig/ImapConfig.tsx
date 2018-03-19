@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { SaveImapConfigMutation, ImapConfigQuery } from "../../generated/types";
 import { Row, Col } from "react-grid-system";
 import { ImapConfigModal } from "./ImapConfigModal";
+import { HAS_COMPLETE_IMAP_CONFIG_QUERY } from "../../gql/queries/users/HasCompleteImapConfig";
 
 type State = {} & FormState;
 type Props = MutationProps;
@@ -24,7 +25,7 @@ class ImapConfig extends React.Component<Props, State> {
       if (this.props.mutate) {
         this.props.mutate({
           variables: { userName, password, host, port },
-          refetchQueries: [{ query: IMAPCONFIG_QUERY }]
+          refetchQueries: [{ query: IMAPCONFIG_QUERY }, { query: HAS_COMPLETE_IMAP_CONFIG_QUERY }]
         });
       }
       toast.success("Imap config saved", { position: toast.POSITION.TOP_RIGHT });

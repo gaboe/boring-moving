@@ -28,7 +28,6 @@ class ImapConfigForm extends React.Component<ComponentProps, State> {
         formError: false
       });
     }
-    console.log(this.state);
   };
 
   constructor(props: ComponentProps) {
