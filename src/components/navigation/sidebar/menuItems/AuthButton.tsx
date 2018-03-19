@@ -4,11 +4,10 @@ import { Menu, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 import { Props as LogoutProps } from "./../../../../gql/mutations/users/Logout";
-import { RULES_ON_USER_QUERY } from "../../../../gql/queries/rules/RulesOnUserQuery";
-import { USER_QUERY } from "./../../../../gql/queries/users/UserQuery";
 
 type Props = {
   isAuthenticated: boolean;
+  onLogout: () => void;
 } & LogoutProps;
 
 const AuthButton: React.SFC<Props> = props => {
@@ -28,11 +27,7 @@ const AuthButton: React.SFC<Props> = props => {
           onClick={() => {
             if (props.mutate) {
               props.mutate({
-                refetchQueries: [
-                  { query: USER_QUERY },
-                  { query: RULES_ON_USER_QUERY }
-                ]
-              });
+              }).then(_ => props.onLogout());
             }
           }}
         />

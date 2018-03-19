@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Query } from "react-apollo";
+import { Query, withApollo } from "react-apollo";
 import {
   USER_QUERY as query,
   Props as QueryProps
@@ -10,8 +10,9 @@ import {
 } from "./../../../../gql/mutations/users/Logout";
 import { ContentMenuItems } from "./ContentMenuItems";
 import { AuthButton } from "./AuthButton";
+import { WithApolloClient } from "react-apollo/withApollo";
 
-type Props = QueryProps & MutationProps;
+type Props = WithApolloClient<QueryProps & MutationProps>;
 
 const isAuthentificated = (props: Props) =>
   props.data !== undefined && props.data.user !== null;
@@ -26,6 +27,7 @@ const MenuItems: React.SFC<Props> = props => {
             <AuthButton
               isAuthenticated={isAuthentificated(result)}
               mutate={props.mutate}
+              onLogout={() => props.client.resetStore()}
             />
           </>
         );
@@ -34,5 +36,5 @@ const MenuItems: React.SFC<Props> = props => {
   );
 };
 
-const hoc = withLogout(MenuItems);
+const hoc = withLogout(withApollo(MenuItems));
 export { hoc as MenuItems };
