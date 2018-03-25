@@ -158,13 +158,9 @@
               "isDeprecated": false,
               "name": "mostActiveRules",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "MetaStatType",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "MetaStatType",
+                "ofType": null
               }
             },
             {

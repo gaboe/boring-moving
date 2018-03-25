@@ -4,6 +4,7 @@ import { Menu, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 import { Props as LogoutProps } from "./../../../../gql/mutations/users/Logout";
+import { USER_QUERY } from "../../../../gql/queries/users/UserQuery";
 
 type Props = {
   isAuthenticated: boolean;
@@ -27,6 +28,11 @@ const AuthButton: React.SFC<Props> = props => {
           onClick={() => {
             if (props.mutate) {
               props.mutate({
+                update: (proxy, data) => {
+                  if (data.data) {
+                    proxy.writeQuery({ query: USER_QUERY, data: null });
+                  }
+                }
               }).then(_ => props.onLogout());
             }
           }}

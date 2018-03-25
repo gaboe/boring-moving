@@ -143,7 +143,7 @@ export interface MostActiveRulesQuery {
         subject: string | null,
       },
     } >,
-  },
+  } | null,
 };
 
 export interface GetRuleByIDQueryVariables {

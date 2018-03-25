@@ -53,10 +53,10 @@ class Home extends React.Component<{}, State> {
         variables={variables}
       >
         {result => {
-          if (result.loading) {
+          if (result.loading || !result.data || !result.data.mostActiveRules) {
             return null;
           }
-          if (result.data && result.data.mostActiveRules.count > 0) {
+          if (result.data.mostActiveRules.count > 0) {
             return (
               <>
                 <Row>
