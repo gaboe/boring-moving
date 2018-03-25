@@ -10,7 +10,7 @@ class AppEmailCount extends React.Component<{}> {
                 <AppStatQueryComponent query={APP_STAT_QUERY} >
                     {
                         response => {
-                            if (!response.data) {
+                            if (!response.data || response.loading) {
                                 return null;
                             }
                             return (

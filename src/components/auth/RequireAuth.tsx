@@ -19,7 +19,10 @@ const hoc = (WrappedComponent: Component) => {
       }
     }
     render() {
-      return <WrappedComponent {...this.props} />;
+      if (this.props.data && !this.props.data.loading && this.props.data.user) {
+        return <WrappedComponent {...this.props} />;
+      }
+      return null;
     }
   }
   return withUser(RequireAuth);

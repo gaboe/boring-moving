@@ -56,7 +56,7 @@ class Home extends React.Component<{}, State> {
           if (result.loading) {
             return null;
           }
-          if (result.data) {
+          if (result.data && result.data.mostActiveRules.count > 0) {
             return (
               <>
                 <Row>

@@ -65,8 +65,6 @@ class Login extends React.Component<PropsWithRouter, State> {
   };
 
   render() {
-    console.log(process.env.REACT_APP_SERVER_URL);
-    console.log(process.env.REACT_APP_GOOGLE_API_CLIENT_ID);
     return (
       <>
         <Row >
