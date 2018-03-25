@@ -187,6 +187,21 @@ export interface AppStatQuery {
   },
 };
 
+export interface EmailsMovedByRuleQueryVariables {
+  sender: string,
+  subject?: string | null,
+  content?: string | null,
+  folderName: string,
+  period: number,
+};
+
+export interface EmailsMovedByRuleQuery {
+  appStat:  {
+    __typename: "AppStatType",
+    emailsMovedByRule: number | null,
+  },
+};
+
 export interface HasCompleteImapConfigQuery {
   user:  {
     __typename: "UserType",

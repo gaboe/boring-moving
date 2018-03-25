@@ -8,14 +8,16 @@ import {
   Props
 } from "./../../gql/mutations/rules/AddRule";
 import { RouterProps } from "react-router";
-import { AddRuleMutationVariables } from "../../generated/types";
 import styled from "styled-components";
 import { RuleType } from "../../gql/queries/rules/RuleQuery";
 import { Row, Col } from "react-grid-system";
+import { RuleVerificationModal } from "./RuleVerificationModal";
 
 type State = {
   errors: string[];
-} & AddRuleMutationVariables;
+  isModalOpened: boolean;
+  rule?: RuleType;
+};
 type PropsWithRouter = Props & RouterProps;
 
 const HeaderStyle = styled.header`
@@ -27,11 +29,7 @@ class AddRule extends React.Component<PropsWithRouter, State> {
     super(props);
     this.state = {
       errors: [],
-      sender: "",
-      subject: "",
-      content: "",
-      folderName: "",
-      period: 0
+      isModalOpened: false,
     };
   }
 
@@ -39,19 +37,30 @@ class AddRule extends React.Component<PropsWithRouter, State> {
     this.setState({ [data.name]: data.value, errors: [] });
   };
 
-  addMutation = (rule: NonNullable<RuleType>) => {
-    if (this.props.mutate) {
-      const { sender, content, subject, folderName, period } = rule;
+  submit = (rule: NonNullable<RuleType>) => {
+    this.setState({ isModalOpened: true, rule: rule })
+  };
+
+  addMutation = () => {
+    console.log("object");
+    if (this.props.mutate && this.state.rule) {
+      console.log("hej");
+      const { sender, content, subject, folderName, period } = this.state.rule;
       this.props
         .mutate({
           variables: { sender, subject, content, folderName, period },
           refetchQueries: [{ query: RULES_ON_USER_QUERY }]
         })
         .then(({ data }) => {
+          console.log("hej2");
           this.props.history.push("/rules");
         });
     }
   };
+
+  onModalClose = () => {
+    this.setState({ isModalOpened: false })
+  }
 
   render() {
     return (
@@ -61,7 +70,13 @@ class AddRule extends React.Component<PropsWithRouter, State> {
             <HeaderStyle>
               <Header as="h1" content="Create new rule" />
             </HeaderStyle>
-            <AddRuleForm onSubmit={this.addMutation} />
+            <AddRuleForm onSubmit={this.submit} />
+            <RuleVerificationModal
+              close={this.onModalClose}
+              isOpened={this.state.isModalOpened}
+              rule={this.state.rule}
+              onContinue={this.addMutation}
+            />
           </Col>
         </Row>
       </>
