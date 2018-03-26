@@ -9,6 +9,7 @@ import { NonAuthenificatedUser } from "../../models/User";
 import { Col, Row, } from 'react-grid-system';
 import { AppEmailCount } from "./AppEmailCount";
 import { AuthentificateMutation, AuthentificateMutationVariables } from "../../generated/types";
+import { HAS_COMPLETE_IMAP_CONFIG_QUERY } from "../../gql/queries/users/HasCompleteImapConfig";
 
 const GoogleButtonStyle: CSSProperties = {};
 type State = {
@@ -45,7 +46,8 @@ class Login extends React.Component<PropsWithRouter, State> {
               proxy.writeQuery({ query: USER_QUERY, data: user });
             }
             this.props.history.push("/");
-          }
+          },
+          refetchQueries: [{ query: HAS_COMPLETE_IMAP_CONFIG_QUERY }]
         })
         .catch(error => {
           this.setState({ formError: true });

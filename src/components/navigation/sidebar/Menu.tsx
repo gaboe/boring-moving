@@ -4,6 +4,7 @@ import { MenuItems } from "./menuItems/MenuItems";
 import Query, { QueryResult } from "react-apollo/Query";
 import { USER_QUERY } from "../../../gql/queries/users/UserQuery";
 import { UserQuery } from "../../../generated/types";
+import { HasCompleteConfigDisclaimer } from "../upperbar/HasCompleteImapConfigDisclaimer";
 
 type Props = {
   setVisibilityTrue: () => void;
@@ -34,6 +35,7 @@ const MenuComponent: React.SFC<Props> = props => {
             onMouseLeave={props.setVisibilityFalse}
           >
             <MenuItems />
+            <HasCompleteConfigDisclaimer />
           </Sidebar>
         )
       }}
