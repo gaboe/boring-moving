@@ -42,9 +42,7 @@ class AddRule extends React.Component<PropsWithRouter, State> {
   };
 
   addMutation = () => {
-    console.log("object");
     if (this.props.mutate && this.state.rule) {
-      console.log("hej");
       const { sender, content, subject, folderName, period } = this.state.rule;
       this.props
         .mutate({
@@ -52,7 +50,6 @@ class AddRule extends React.Component<PropsWithRouter, State> {
           refetchQueries: [{ query: RULES_ON_USER_QUERY }]
         })
         .then(({ data }) => {
-          console.log("hej2");
           this.props.history.push("/rules");
         });
     }

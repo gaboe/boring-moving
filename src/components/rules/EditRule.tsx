@@ -9,18 +9,28 @@ import { AddRuleForm } from "./AddRuleForm";
 import { withUpdateRuleMutation, Props as MutationProps } from "../../gql/mutations/rules/UpdateRule";
 import { UpdateRuleMutationVariables, GetRuleByIDQuery } from "../../generated/types";
 import { ToastContainer, toast } from "react-toastify";
+import { RuleVerificationModal } from "./RuleVerificationModal"
 
 type Props = RouteComponentProps<{ id: string }> & MutationProps;
-type State = { errors: string[]; rule?: RuleType };
+type State = { errors: string[]; rule?: RuleType, isModalOpened: boolean };
 
 class EditRule extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { errors: [] };
+  onModalClose = () => {
+    this.setState({ isModalOpened: false })
   }
 
-  onSubmit = (rule: NonNullable<RuleType>) => {
-    if (this.props.mutate) {
+  constructor(props: Props) {
+    super(props);
+    this.state = { errors: [], isModalOpened: false };
+  }
+
+  verify = (rule: NonNullable<RuleType>) => {
+    this.setState({ isModalOpened: true, rule: rule })
+  };
+
+  update = () => {
+    const { rule } = this.state;
+    if (this.props.mutate && rule) {
       const variables: UpdateRuleMutationVariables = {
         content: rule.content,
         folderName: rule.folderName,
@@ -29,6 +39,7 @@ class EditRule extends React.Component<Props, State> {
         subject: rule.subject,
         id: rule.id
       }
+      this.setState({ isModalOpened: false });
       this.props.mutate({
         variables: variables,
         update: (proxy, data) => {
@@ -54,8 +65,14 @@ class EditRule extends React.Component<Props, State> {
                 <>
                   <h1>EditRule</h1>
                   <AddRuleForm
-                    onSubmit={this.onSubmit}
+                    onSubmit={this.verify}
                     rule={response.data.rule}
+                  />
+                  <RuleVerificationModal
+                    close={this.onModalClose}
+                    isOpened={this.state.isModalOpened}
+                    rule={this.state.rule}
+                    onContinue={this.update}
                   />
                 </>
               );

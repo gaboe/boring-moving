@@ -75,7 +75,7 @@ class Home extends React.Component<{}, State> {
                       width={this.getWidth()}
                       height={this.state.windowHeight < 600 ? this.state.windowHeight - 100 : 600}
                       data={result.data.mostActiveRules.rules.map(x => {
-                        return { rule: `${x.rule.subject}`, count: x.count };
+                        return { rule: `${x.rule.subject ? x.rule.subject : x.rule.folderName}`, count: x.count };
                       })}
                     >
                       <XAxis dataKey="rule" />
