@@ -106,9 +106,9 @@ class Home extends React.Component<{}, State> {
           }
           return (
             <Row>
-              <Col offset={{ sm: 1, lg: 2, xl: 3 }} sm={10} lg={8} xl={6}>
+              <Col offset={{ sm: 1, lg: 2, xl: 3 }} xs={8} sm={8} lg={8} xl={6}>
                 <Header
-                  as="h3"
+                  as="h1"
                   content="There are no data about moved emails. Have you configured imap and created rule?"
                 />
               </Col>

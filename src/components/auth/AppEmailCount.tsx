@@ -16,7 +16,7 @@ class AppEmailCount extends React.Component<{}> {
                             return (
                                 <>
                                     <Row >
-                                        <Col offset={{ xs: 5, lg: 5 }}>
+                                        <Col offset={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }}>
                                             <Statistic size="huge">
                                                 <Statistic.Value>
                                                     <Icon name='mail' />

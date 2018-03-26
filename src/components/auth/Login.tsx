@@ -68,7 +68,7 @@ class Login extends React.Component<PropsWithRouter, State> {
     return (
       <>
         <Row >
-          <Col offset={{ xs: 1, sm: 1, md: 2, lg: 3 }} xs={10} lg={6}>
+          <Col offset={{ xs: 0, sm: 1, md: 1, lg: 2, xl: 3 }} xs={8} lg={6} xl={6}>
             <Header as="h1" content="Welcome to Boring Moving!" />
             <Header as="h2" content="App that automates boring email moving" />
 
@@ -77,14 +77,24 @@ class Login extends React.Component<PropsWithRouter, State> {
               Google account
             </Header>
             {process.env.REACT_APP_GOOGLE_API_CLIENT_ID &&
-              <GoogleLogin
-                className="ui linkedin button"
-                clientId={process.env.REACT_APP_GOOGLE_API_CLIENT_ID}
-                buttonText="Login with Google"
-                onSuccess={this.googleResponse}
-                onFailure={this.googleResponse}
-                style={GoogleButtonStyle}
-              />}
+              <>
+                <Row >
+                  <Col
+                    offset={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 4 }}
+                    lg={6}
+                  >
+                    <GoogleLogin
+                      className="ui linkedin button"
+                      clientId={process.env.REACT_APP_GOOGLE_API_CLIENT_ID}
+                      buttonText="Login with Google"
+                      onSuccess={this.googleResponse}
+                      onFailure={this.googleResponse}
+                      style={GoogleButtonStyle}
+                    />
+                  </Col>
+                </Row >
+              </>
+            }
           </Col>
         </Row >
         <AppEmailCount />
