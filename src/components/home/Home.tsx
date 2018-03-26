@@ -89,10 +89,14 @@ class Home extends React.Component<{}, State> {
             );
           }
           return (
-            <Header
-              as="h3"
-              content="There are no data about moved emails. Have you configured imap and created rule?"
-            />
+            <Row>
+              <Col offset={{ sm: 1, lg: 2, xl: 3 }} sm={10} lg={8} xl={6}>
+                <Header
+                  as="h3"
+                  content="There are no data about moved emails. Have you configured imap and created rule?"
+                />
+              </Col>
+            </Row>
           );
         }}
       </MostActiveQueryComponent>
