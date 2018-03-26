@@ -16,6 +16,7 @@ class ImapConfigModal extends React.Component {
                 trigger={<Icon onClick={this.handleOpen} link={true} name="question circle" size="large" />}
                 basic={true}
                 size='small'
+                dimmer="blurring"
             >
                 <Header icon='mail' content='Why we need your imap config?' />
                 <Modal.Content>

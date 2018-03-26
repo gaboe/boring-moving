@@ -31,6 +31,7 @@ class RuleVerificationModal extends React.Component<Props, State> {
                 onClose={() => this.props.close()}
                 basic={true}
                 size='small'
+                dimmer="blurring"
             >
                 <EmailsMovedByRuleComponent
                     query={EMAILS_MOVED_BY_RULE}
