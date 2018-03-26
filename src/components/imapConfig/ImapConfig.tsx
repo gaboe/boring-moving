@@ -54,7 +54,7 @@ class ImapConfig extends React.Component<Props, State> {
     return (
       <>
         <Row>
-          <Col offset={{ sm: 1, md: 2, lg: 1 }} sm={10} md={8} lg={9}>
+          <Col offset={{ sm: 1, md: 2, lg: 3 }} sm={8} md={6} lg={5}>
             <Row style={divStyle}>
               <Header as="h1" icon="setting" content="Imap config" />
               <ImapConfigModal />

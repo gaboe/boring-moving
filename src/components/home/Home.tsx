@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from "recharts";
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Cell } from "recharts";
 import {
   MostActiveQueryComponent,
   MOST_ACTIVE_RULES_QUERY
@@ -18,6 +18,8 @@ const MovedData = styled.div`
   margin-top: 1em;
   margin-bottom: 2em;
 `
+
+const Colors = ["#4CAF50", "#448AFF", "#E040FB", "#FF5722", "#FF4081"]
 
 class Home extends React.Component<{}, State> {
   constructor(props: {}) {
@@ -66,7 +68,7 @@ class Home extends React.Component<{}, State> {
               <>
                 <MovedData>
                   <Row>
-                    <Col offset={{ xs: 2, sm: 3, }} xs={8} sm={4}>
+                    <Col offset={{ xs: 2, sm: 2, md: 3, lg: 4 }} xs={8} sm={6} md={6} lg={4}>
                       <Header
                         as="h3"
                         content={`Boring moving moved ${
@@ -89,7 +91,13 @@ class Home extends React.Component<{}, State> {
                       <XAxis type="number" />
                       <YAxis type="category" dataKey="rule" />
                       <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                      <Bar dataKey="count" fill="#016936" barSize={30} />
+                      <Bar dataKey="count" fill="#016936" barSize={30} >
+                        {
+                          result.data.mostActiveRules.rules.map((x, i) => {
+                            return (<Cell key={i} fill={Colors[i]} />)
+                          })
+                        }
+                      </Bar>
                     </BarChart>
                   </Col>
                 </Row>
