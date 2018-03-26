@@ -19,7 +19,7 @@ const MovedData = styled.div`
   margin-bottom: 2em;
 `
 
-const Colors = ["#4CAF50", "#448AFF", "#E040FB", "#FF5722", "#FF4081"]
+const Colors = ["#FF5722", "#448AFF", "#E040FB", "#4CAF50", "#FF4081"]
 
 class Home extends React.Component<{}, State> {
   constructor(props: {}) {
