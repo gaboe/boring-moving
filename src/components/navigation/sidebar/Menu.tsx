@@ -12,9 +12,9 @@ const MenuComponent: React.SFC<Props> = props => {
   return (
     <Sidebar
       as={Menu}
-      animation="scale down"
+      animation="push"
       width="thin"
-      visible={props.isMenuVisible}
+      visible={true}
       icon="labeled"
       vertical={true}
       inverted={true}

@@ -18,6 +18,10 @@ import { HAS_COMPLETE_IMAP_CONFIG_QUERY } from "../../gql/queries/users/HasCompl
 type State = {} & FormState;
 type Props = MutationProps;
 
+const divStyle = {
+  marginLeft: "0",
+};
+
 class ImapConfig extends React.Component<Props, State> {
   submitForm = (formState: FormState): void => {
     if (formState.imap) {
@@ -50,15 +54,15 @@ class ImapConfig extends React.Component<Props, State> {
     return (
       <>
         <Row>
-          <Col offset={{ sm: 1, md: 2 }} sm={10} md={8}>
+          <Col offset={{ sm: 1, md: 2, lg: 1 }} sm={10} md={8} lg={9}>
+            <Row style={divStyle}>
+              <Header as="h1" icon="setting" content="Imap config" />
+              <ImapConfigModal />
+            </Row>
             <ImapConfigQueryComponent query={IMAPCONFIG_QUERY}>
               {response => {
                 return (
                   <>
-                    <Row>
-                      <Header as="h1" content={"Imap config"} />
-                      <ImapConfigModal />
-                    </Row>
                     {this.renderForm(response.data)}
                   </>
                 );

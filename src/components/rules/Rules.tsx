@@ -43,7 +43,7 @@ const Rules: React.SFC<Props> = props => {
   return (
     <>
       <Row>
-        <Col offset={{ md: 1 }} md={10}>
+        <Col offset={{ md: 1 }} md={9}>
           <RulesOnQueryComponent query={query}>
             {response => {
               return (

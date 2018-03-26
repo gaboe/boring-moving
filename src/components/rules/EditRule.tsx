@@ -10,6 +10,7 @@ import { withUpdateRuleMutation, Props as MutationProps } from "../../gql/mutati
 import { UpdateRuleMutationVariables, GetRuleByIDQuery } from "../../generated/types";
 import { ToastContainer, toast } from "react-toastify";
 import { RuleVerificationModal } from "./RuleVerificationModal"
+import { Row, Col } from "react-grid-system";
 
 type Props = RouteComponentProps<{ id: string }> & MutationProps;
 type State = { errors: string[]; rule?: RuleType, isModalOpened: boolean };
@@ -63,17 +64,21 @@ class EditRule extends React.Component<Props, State> {
             if (response.data) {
               return (
                 <>
-                  <h1>EditRule</h1>
-                  <AddRuleForm
-                    onSubmit={this.verify}
-                    rule={response.data.rule}
-                  />
-                  <RuleVerificationModal
-                    close={this.onModalClose}
-                    isOpened={this.state.isModalOpened}
-                    rule={this.state.rule}
-                    onContinue={this.update}
-                  />
+                  <Row>
+                    <Col offset={{ lg: 1 }} lg={10}>
+                      <h1>Edit rule</h1>
+                      <AddRuleForm
+                        onSubmit={this.verify}
+                        rule={response.data.rule}
+                      />
+                      <RuleVerificationModal
+                        close={this.onModalClose}
+                        isOpened={this.state.isModalOpened}
+                        rule={this.state.rule}
+                        onContinue={this.update}
+                      />
+                    </Col>
+                  </Row>
                 </>
               );
             }
